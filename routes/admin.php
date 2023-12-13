@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/admin-login', [App\Http\Controllers\Auth\LoginController::class, 'adminlogin'])->name('admin.login');
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'admin'])->name('admin.home')->middleware('is_admin');
 
-Route::get('/check',function(){
-    echo "Admin Route";
-});
