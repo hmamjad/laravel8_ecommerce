@@ -107,6 +107,28 @@
     <script type="text/javascript" src="{{ asset('public/backend/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('public/backend/plugins/sweetalert/sweetalert.min.js') }}"></script>
 
+    {{-- sweet alert for delete --}}
+    <script>
+        $(document).on("click", "#delete", function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            swal({
+                    title: "Are you Want to Delete?",
+                    text: "Once Delete, This will be Permanently Delete!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = link;
+                    } else {
+                        swal("Not Deleted!");
+                    }
+                });
+        });
+    </script>
+
     {{-- sweet alert bofore admin logout --}}
     <script>
         $(document).on("click", "#logout", function(e) {
