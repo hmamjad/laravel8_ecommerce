@@ -21,3 +21,9 @@ npm run dev
 npm run watch
 
 php artisan migrate
+
+<!-- part 6 -->
+php artisan make:migration create_categories_table  
+php artisan migrate
+php artisan make:model Category
+php artisan make:controller Adimi/CategoryController

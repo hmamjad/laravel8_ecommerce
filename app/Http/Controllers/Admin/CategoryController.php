@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    // for Authenticated user
     public function __construct()
     {
         $this->middleware('auth');
@@ -19,14 +20,12 @@ class CategoryController extends Controller
     // All category showing Method
     public function index()
     {
-
         // $data = DB::table('categories')->get();  // quiry builder
 
         $data = Category::all();   // Eloquint ORM
 
         return view('admin.category.category.index', compact('data'));
         //    return response()->json($data);
-
     }
 
     // store method
