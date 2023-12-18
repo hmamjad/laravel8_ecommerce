@@ -22,7 +22,8 @@ class SubcategoryController extends Controller
     public function index()
     {
 
-        $data = DB::table('subcategories')->leftJoin('categories', 'subcategories.category_id', 'categories.id')->select('subcategories.*', 'categories.category_name')->get();  // quiry builder
+        // $data = DB::table('subcategories')->leftJoin('categories', 'subcategories.category_id', 'categories.id')->select('subcategories.*', 'categories.category_name')->get();  // quiry builder
+        $data = Subcategory::all(); //Eloquint ORM
 
         $category = Category::all();   // for category select// Eloquint ORM
         //  $category = DB::table()->get();   // for category select// quiry builder
@@ -75,33 +76,35 @@ class SubcategoryController extends Controller
         // $category = Category::all();
 
         // Quiry builder
-        $data = DB::table('subcategories')->where('id',$id)->first();
+        $data = DB::table('subcategories')->where('id', $id)->first();
         $category = DB::table('categories')->get();
 
         return view('admin.category.subcategory.edit', compact('data', 'category'));
     }
 
 
-      // Update method
-      public function update(Request $request){
+    // Update method
+    public function update(Request $request)
+    {
+
+        //  // Quiry builder
+
+        // $data = array();
+        // $data['category_id'] = $request->category_id;
+        // $data['subcategory_name']=$request->subcategory_name;
+        // $data['subcategory_slug']=Str::slug($request->subcategory_name, '-');
+        // DB::table('subcategories')->where('id',$request->id)->update($data);
+
+
 
         // // Eloquint ORM
-        // $subcategory = Subcategory::where('id',$request->id)->first();
+        $subcategory = Subcategory::where('id', $request->id)->first();
 
-        // $subcategory->update([
-        //     'category_id'=>$request->category_id,
-        //     'subcategory_name'=>$request->subcategory_name,
-        //     'subcategory_slug'=>Str::slug($request->subcategory_name, '-'),
-        // ]);
-
-
-         // Quiry builder
-
-        $data = array();
-        $data['category_id'] = $request->category_id;
-        $data['subcategory_name']=$request->subcategory_name;
-        $data['subcategory_slug']=Str::slug($request->subcategory_name, '-');
-        DB::table('subcategories')->where('id',$request->id)->update($data);
+        $subcategory->update([
+            'category_id' => $request->category_id,
+            'subcategory_name' => $request->subcategory_name,
+            'subcategory_slug' => Str::slug($request->subcategory_name, '-'),
+        ]);
 
         $notifications = array('messege' => 'Subcategory Updated', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);

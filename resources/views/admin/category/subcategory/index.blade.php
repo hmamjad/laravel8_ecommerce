@@ -50,7 +50,7 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $row->subcategory_name }}</td>
                                                 <td>{{ $row->subcategory_slug }}</td>
-                                                <td>{{ $row->category_name }}</td>
+                                                <td>{{ $row->category->category_name }}</td>
                                                 <td>
                                                     <a href="#" class="btn btn-info btn-sm edit"
                                                         data-id='{{ $row->id }}' data-toggle="modal"
