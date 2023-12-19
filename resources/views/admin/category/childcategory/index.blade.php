@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Sub-Category</h1>
+                        <h1 class="m-0">Child-Category</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -27,16 +27,16 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">All Sub-Category list here</h3>
+                                <h3 class="card-title">All Child-Category list here</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped table-sm">
+                                <table id="" class="table table-bordered table-striped table-sm ytable">
                                     <thead>
                                         <tr>
                                             <th>#SL</th>
+                                            <th>Child-Category Name</th>
                                             <th>Sub-Category Name</th>
-                                            <th>Sub-Category Slug</th>
                                             <th>Category Name</th>
                                             <th>Action</th>
                                         </tr>
@@ -44,24 +44,6 @@
                                     <tbody>
 
 
-
-                                        @foreach ($data as $key => $row)
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $row->subcategory_name }}</td>
-                                                <td>{{ $row->subcategory_slug }}</td>
-                                                <td>{{ $row->category->category_name }}</td>  {{-- Eloquient Model and relationship with model  --}}    
-                                                <td>
-                                                    <a href="#" class="btn btn-info btn-sm edit"
-                                                        data-id='{{ $row->id }}' data-toggle="modal"
-                                                        data-target="#editModal"><i class="fas fa-edit"></i></a>
-
-                                                    <a href="{{ route('subcategory.delete', $row->id) }}" id="delete"
-                                                        class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
                                     </tbody>
 
                                 </table>
@@ -83,7 +65,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new Sub-Category</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add new Child-Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -97,9 +79,9 @@
                             <label for="category_name">Category Name</label>
                             <select class="form-control" name="category_id" id="">
 
-                                @foreach ($category as $row)
+                                {{-- @foreach ($category as $row)
                                     <option value="{{ $row->id }}">{{ $row->category_name }}</option>
-                                @endforeach
+                                @endforeach --}}
 
                             </select>
                         </div>
@@ -140,29 +122,23 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script type="text/javascript">
-    
-
-
-        $('body').on('click', '.edit', function() {
-            let subcat_id = $(this).data('id');
-
-            // alert(subcat_id); 
-           
-            $.get("subcategory/edit/" + subcat_id, function(data) {
-                // console.log(data);
-                $("#modal_body").html(data);
-                
-            });
-
-
-        });
-
-
+        $(function childcategory(){
+            var table = $('.ytable').DataTable({
+                processing: true,
+                serverSide:true,
+                ajax:'{{route('childcategory.index')}}',
+                columns:[
+                    {data:'DT_RowIndex',name:'DT_RowIndex'},
+                    {data:'childcategory_name',name:'childcategory_name'},
+                    {data:'subcategory_name',name:'subcategory_name'},
+                    {data:'category_name',name:'category_name'},
+                    {data:'action',name:'action',orderable:true,searchable:true},
+                ]
+            })
+        })
     </script>
 @endsection
 <!-- /.content-header -->
