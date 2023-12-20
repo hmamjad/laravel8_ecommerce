@@ -146,8 +146,6 @@
 
     <script type="text/javascript">
     
-
-
         $('body').on('click', '.edit', function() {
             let subcat_id = $(this).data('id');
 
@@ -158,7 +156,6 @@
                 $("#modal_body").html(data);
                 
             });
-
 
         });
 
