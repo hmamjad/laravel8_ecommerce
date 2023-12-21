@@ -29,3 +29,5 @@ php artisan make:model Category
 php artisan make:controller Adimi/CategoryController
 <!-- part 7 semilar -->
 <!-- part 8 semilar -->
+<!-- part 9 semilar -->
+<!-- part 10 semilar -->
