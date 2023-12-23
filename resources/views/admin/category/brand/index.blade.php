@@ -62,7 +62,7 @@
     <!-- Main content -->
 
 
-    <!-- Subcategory insert Modal  -->
+    <!-- Brand insert Modal  -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -73,8 +73,7 @@
                     </button>
                 </div>
 
-                <form action="{{ route('brand.store') }}" method="post" id="add-form"
-                    enctype="multipart/form-data">
+                <form action="{{ route('brand.store') }}" method="post" id="add-form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
 
@@ -87,7 +86,8 @@
 
                         <div class="form-group">
                             <label for="input-file-now">Brand Logo</label>
-                            <input type="file" class="form-control dropify" data-height='140' id="input-file-now" name="brand_logo" required="">
+                            <input type="file" class="form-control dropify" data-height='140' id="input-file-now"
+                                name="brand_logo" required="">
                             <small id="emailHelp" class="form-text text-muted">This is your Brand logo</small>
                         </div>
 
@@ -123,7 +123,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
-{{-- for image drag and drop dropify --}}
+    {{-- for image drag and drop dropify --}}
     <script>
         $('.dropify').dropify();
     </script>
@@ -148,7 +148,10 @@
                     },
                     {
                         data: 'brand_logo',
-                        name: 'brand_logo'
+                        name: 'brand_logo',
+                        render: function(data, type, full, meta) {
+                            return "<img src=\"" + data + "\" height = \"30\" />";
+                        }
                     },
                     {
                         data: 'action',
@@ -160,20 +163,22 @@
             })
         })
     </script>
+
     {{-- for Edit --}}
-    <script type="text/javascript">
-        $('body').on('click', '.edit', function() {
-            let childcat_id = $(this).data('id');
-
-            // alert(childcat_id); 
-
-            $.get("childcategory/edit/" + childcat_id, function(data) {
-                // console.log(data);
-                $("#modal_body").html(data);
-
-            });
-
+<script type="text/javascript">
+    
+    $('body').on('click', '.edit', function() {
+        let brand_id = $(this).data('id');
+       
+        $.get("brand/edit/" + brand_id, function(data) {
+            // console.log(data);
+            $("#modal_body").html(data);
+            
         });
-    </script>
+
+    });
+
+</script>
+
 @endsection
 <!-- /.content-header -->
