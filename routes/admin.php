@@ -52,6 +52,31 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/update', 'BrandController@update')->name('brand.update');
     });
 
+    // Setting route
+    Route::group(['prefix' => 'setting'], function () {
+        // Seo setting route
+        Route::group(['prefix' => 'seo'], function () {
+            Route::get('/', 'SettingController@seo')->name('seo.setting');
+            Route::post('/update/{id}', 'SettingController@seoUpdate')->name('seo.setting.update');
+        });
+        // smpt setting route
+        Route::group(['prefix' => 'smpt'], function () {
+            Route::get('/', 'SettingController@smpt')->name('smpt.setting');
+            Route::post('/update/{id}', 'SettingController@smtpUpdate')->name('smtp.setting.update');
+        });
+        // page setting route
+        Route::group(['prefix' => 'page'], function () {
+            Route::get('/', 'PageController@index')->name('page.index');
+            Route::get('/create', 'PageController@create')->name('create.page');
+            Route::post('/store', 'PageController@store')->name('page.store');
+            Route::get('/delete/{id}', 'PageController@destroy')->name('page.delete');
+            Route::get('/edit/{id}', 'PageController@edit')->name('page.edit');
+            Route::post('/update/{id}', 'PageController@update')->name('page.update');
+        });
+    });
+
+
+
 
 
 
