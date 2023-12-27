@@ -16,7 +16,7 @@ class ChildcategoryController extends Controller
         $this->middleware('auth');
     }
 
-
+    // show with yajra datatable
     public function index(Request $request)
     {
         if ($request->ajax()) {

@@ -51,7 +51,7 @@ class BrandController extends Controller
         $data = array();
         $data['brand_name'] = $request->brand_name;
         $data['brand_slug'] = Str::slug($request->brand_name, '-');
-        // working wit image
+        // working with image
         $slug = Str::slug($request->brand_name, '-');
         $photo = $request->brand_logo;
         $photoname = $slug . '.' . $photo->getClientOriginalExtension();
@@ -101,7 +101,7 @@ class BrandController extends Controller
     }
 
 
-    // store method
+    // Update method
 
     public function update(Request $request)
     {

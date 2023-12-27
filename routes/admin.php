@@ -52,12 +52,29 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/update', 'BrandController@update')->name('brand.update');
     });
 
+    // Warehouse route
+    Route::group(['prefix' => 'warehouse'], function () {
+
+        Route::get('/', 'WarehouseController@index')->name('warehouse.index');
+        Route::post('/store', 'WarehouseController@store')->name('warehouse.store');
+        Route::get('/delete/{id}', 'WarehouseController@destroy')->name('warehouse.delete');
+        // Route::get('/edit/{id}', 'BrandController@edit');
+        // Route::post('/update', 'BrandController@update')->name('brand.update');
+    });
+
+
+
     // Setting route
     Route::group(['prefix' => 'setting'], function () {
         // Seo setting route
         Route::group(['prefix' => 'seo'], function () {
             Route::get('/', 'SettingController@seo')->name('seo.setting');
             Route::post('/update/{id}', 'SettingController@seoUpdate')->name('seo.setting.update');
+        });
+        // website setting route
+        Route::group(['prefix' => 'website'], function () {
+            Route::get('/', 'SettingController@website')->name('website.setting');
+            Route::post('/update/{id}', 'SettingController@websiteUpdate')->name('website.setting.update');
         });
         // smpt setting route
         Route::group(['prefix' => 'smpt'], function () {
