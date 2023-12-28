@@ -58,8 +58,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::get('/', 'WarehouseController@index')->name('warehouse.index');
         Route::post('/store', 'WarehouseController@store')->name('warehouse.store');
         Route::get('/delete/{id}', 'WarehouseController@destroy')->name('warehouse.delete');
-        // Route::get('/edit/{id}', 'BrandController@edit');
-        // Route::post('/update', 'BrandController@update')->name('brand.update');
+        Route::get('/edit/{id}', 'WarehouseController@edit');
+        Route::post('/update', 'WarehouseController@update')->name('warehouse.update');
     });
 
 

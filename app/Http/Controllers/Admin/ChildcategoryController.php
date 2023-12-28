@@ -71,6 +71,7 @@ class ChildcategoryController extends Controller
         $data = DB::table('childcategories')->where('id', $id)->first();
         
         return view('admin.category.childcategory.edit', compact('data', 'category'));
+        
     }
 
 

@@ -107,14 +107,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit SubCategory</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Warehouse</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
                 <div id="modal_body">
-
+                    
                 </div>
 
             </div>
@@ -161,11 +161,13 @@
 {{-- for Edit --}}
 <script type="text/javascript">
     $('body').on('click', '.edit', function() {
-        let childcat_id = $(this).data('id');
-        // alert(childcat_id); 
-        $.get("childcategory/edit/" + childcat_id, function(data) {
+        let warehouse_id = $(this).data('id');
+        // alert(warehouse_id); 
+       
+        $.get("warehouse/edit/"+warehouse_id, function(data) {
             // console.log(data);
             $("#modal_body").html(data);
+            
         });
     });
 </script>
