@@ -52,6 +52,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/update', 'BrandController@update')->name('brand.update');
     });
 
+    // Coupon route
+    Route::group(['prefix' => 'coupon'], function () {
+
+        Route::get('/', 'CouponController@index')->name('coupon.index');
+        // Route::post('/store', 'BrandController@store')->name('brand.store');
+        Route::delete('/delete/{id}', 'CouponController@destroy')->name('coupon.delete');
+        // Route::get('/edit/{id}', 'BrandController@edit');
+        // Route::post('/update', 'BrandController@update')->name('brand.update');
+    });
+
     // Warehouse route
     Route::group(['prefix' => 'warehouse'], function () {
 
