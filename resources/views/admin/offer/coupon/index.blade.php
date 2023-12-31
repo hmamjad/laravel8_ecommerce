@@ -65,7 +65,7 @@
     <!-- Main content -->
 
 
-    <!-- Subcategory insert Modal  -->
+    <!-- coupon insert Modal  -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,7 +76,7 @@
                     </button>
                 </div>
 
-                <form action="#" method="post">
+                <form action="{{route('store.coupon')}}" method="post" id="add_form">
                     @csrf
                     <div class="modal-body">
 
@@ -88,7 +88,7 @@
 
                         <div class="form-group">
                             <label for="type">Coupon Type</label>
-                            <select class="form-control" name="type" id="type">
+                            <select class="form-control" name="type" id="type" required="">
                                 <option value="1">Fixed</option>
                                 <option value="2">Percentage</option>
                             </select>
@@ -105,10 +105,18 @@
                             <input type="date" class="form-control" id="valid_date" name="valid_date" required="">
                         </div>
 
+                        <div class="form-group">
+                            <label for="status">Coupon Status</label>
+                            <select class="form-control" name="status" id="status" required="">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary"> <span class="d-none">Loging.....</span>
+                        <button type="submit" class="btn btn-primary"> <span class="loading d-none">Loging.....</span>
                             Submit</button>
                     </div>
                 </form>
@@ -121,7 +129,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit SubCategory</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Coupon</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -176,7 +184,73 @@
         })
     </script>
 
-    {{-- sweet alert for delete --}}
+
+
+    <script>
+        //store coupon ajax call
+        $('#add_form').submit(function(e) {
+                e.preventDefault();
+                $(".loading").removeClass('d-none');
+                var url = $(this).attr('action');
+                var request = $(this).serialize();
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    async: false,
+                    data: request,
+                    success: function(data) {
+                        $(".loading").addClass('d-none');
+                        toastr.success(data);
+                        $("#addModal").modal('hide');
+                        $('#add_form')[0].reset();
+                        table.ajax.reload();
+                    }
+                });
+            });
+    </script>
+
+
+
+     {{-- for Edit  coupon --}}
+<script type="text/javascript">
+    
+    $('body').on('click', '.edit', function() {
+        let coupon_id = $(this).data('id');
+       
+        $.get("coupon/edit/" + coupon_id, function(data) {
+            // console.log(data);
+            $("#modal_body").html(data);
+            
+        });
+
+    });
+
+</script>
+
+<script>
+    //Update coupon ajax call
+    $('#edit_form').submit(function(e) {
+            e.preventDefault();
+            $(".loading").removeClass('d-none');
+            var url = $(this).attr('action');
+            var request = $(this).serialize();
+            $.ajax({
+                url: url,
+                type: 'post',
+                async: false,
+                data: request,
+                success: function(data) {
+                    $(".loading").addClass('d-none');
+                    toastr.success(data);
+                    $("#editModal").modal('hide');
+                    $('#edit_form')[0].reset();
+                    table.ajax.reload();
+                }
+            });
+        });
+</script>
+
+    {{-- sweet alert for delete ajax call --}}
     <script>
         $(document).ready(function() {
 
@@ -213,6 +287,7 @@
                     async: false,
                     data: request,
                     success: function(data) {
+                        toastr.success(data);
                         $('#deleted_form')[0].reset();
                         table.ajax.reload();
                     }
@@ -221,5 +296,6 @@
 
         })
     </script>
+
 @endsection
 <!-- /.content-header -->

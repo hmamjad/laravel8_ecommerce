@@ -37,6 +37,46 @@ class CouponController extends Controller
         return view('admin.offer.coupon.index');
     }
 
+    // insert coupon
+
+    public function store(Request $request){
+        $data = array(
+            'coupon_code'=>$request->coupon_code,
+            'type'=>$request->type,
+            'coupon_amount'=>$request->coupon_amount,
+            'valid_date'=>$request->valid_date,
+            'status'=>$request->status,
+        );
+
+        DB::table('coupons')->insert($data);
+        return response()->json("coupone stored");
+    }
+
+    // Edit coupon
+    public function edit($id)
+    {
+
+        $data = DB::table('coupons')->where('id', $id)->first();
+
+        return view('admin.offer.coupon.edit', compact('data'));
+    }
+
+     //  Update coupon
+     public function update(Request $request){
+        $data = array(
+            'coupon_code'=>$request->coupon_code,
+            'type'=>$request->type,
+            'coupon_amount'=>$request->coupon_amount,
+            'valid_date'=>$request->valid_date,
+            'status'=>$request->status,
+        );
+
+        DB::table('coupons')->where('id',$request->id)->update($data);
+        return response()->json("coupone Updated");
+
+     }
+
+
 
     // delete coupon
 
@@ -44,6 +84,8 @@ class CouponController extends Controller
         DB::table('coupons')->where('id',$id)->delete();
         return response()->json("coupone delete");
     }
+
+   
 
 
 

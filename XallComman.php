@@ -27,7 +27,14 @@ php artisan make:migration create_categories_table
 php artisan migrate
 php artisan make:model Category
 php artisan make:controller Adimi/CategoryController
-<!-- part 7 semilar -->
-<!-- part 8 semilar -->
-<!-- part 9 semilar -->
-<!-- part 10 semilar -->
+<!-- next all Semilar -->
+
+<!-- part 21 -->
+composer require yoeunes/toastr
+**add this in app.php in provider (Yoeunes\Toastr\ToastrServiceProvider::class,)
+php artisan vendor:publish --provider="Yoeunes\Toastr\ToastrServiceProvider" 
+php artisan vendor:publish   (then enter  [14] Provider: Yoeunes\Toastr\ToastrServiceProvider)
+
+
+
+
