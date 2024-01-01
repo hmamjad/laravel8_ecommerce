@@ -52,6 +52,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/update', 'BrandController@update')->name('brand.update');
     });
 
+    // Product route
+    Route::group(['prefix' => 'product'], function () {
+
+        Route::get('/create', 'ProductController@create')->name('product.create');
+        // Route::post('/store', 'BrandController@store')->name('brand.store');
+        // Route::get('/delete/{id}', 'BrandController@destroy')->name('brand.delete');
+        // Route::get('/edit/{id}', 'BrandController@edit');
+        // Route::post('/update', 'BrandController@update')->name('brand.update');
+    });
+
     // Coupon route
     Route::group(['prefix' => 'coupon'], function () {
 
@@ -104,7 +114,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
 
 
 
-
+      // Pickup Point route
+      Route::group(['prefix' => 'pickup-point'], function () {
+        Route::get('/', 'PickupController@index')->name('pickuppoint.index');
+        Route::post('/store', 'PickupController@store')->name('store.pickup.point');
+        Route::delete('/delete/{id}', 'PickupController@destroy')->name('pickup.point.delete');
+        Route::get('/edit/{id}', 'PickupController@edit');
+        Route::post('/update', 'PickupController@update')->name('pickup.point.update');
+    });
 
 
 });
