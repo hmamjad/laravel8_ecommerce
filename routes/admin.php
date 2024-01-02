@@ -22,6 +22,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/update', 'CategoryController@update')->name('category.update');
     });
 
+    // global route
+    Route::get('/get-child-category/{id}', 'CategoryController@GetChildCategory');
+
+
     // Subcategory route
     Route::group(['prefix' => 'subcategory'], function () {
 
@@ -56,7 +60,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
     Route::group(['prefix' => 'product'], function () {
 
         Route::get('/create', 'ProductController@create')->name('product.create');
-        // Route::post('/store', 'BrandController@store')->name('brand.store');
+        Route::post('/store', 'ProductController@store')->name('product.store');
         // Route::get('/delete/{id}', 'BrandController@destroy')->name('brand.delete');
         // Route::get('/edit/{id}', 'BrandController@edit');
         // Route::post('/update', 'BrandController@update')->name('brand.update');

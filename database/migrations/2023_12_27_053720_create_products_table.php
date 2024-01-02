@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProdutsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProdutsTable extends Migration
      */
     public function up()
     {
-        Schema::create('produts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id');
@@ -21,9 +21,12 @@ class CreateProdutsTable extends Migration
             $table->integer('brand_id')->nullable();
             $table->integer('pickup_point_id')->nullable();
             $table->string('name');
-            $table->string('code');
+            $table->string('slug')->nullable();
+            $table->string('code')->nullable();
             $table->string('unit')->nullable();
             $table->string('tags')->nullable();
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->string('video')->nullable();
             $table->string('purchase_price')->nullable();
             $table->string('celling_price')->nullable();
@@ -39,6 +42,9 @@ class CreateProdutsTable extends Migration
             $table->integer('flash_deal_id')->nullable();
             $table->integer('cash_on_delivery')->nullable();
             $table->integer('admin_id')->nullable(); // who add this product
+            $table->integer('date')->nullable();
+            $table->integer('month')->nullable();
+            $table->integer('year')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
@@ -52,6 +58,6 @@ class CreateProdutsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produts');
+        Schema::dropIfExists('products');
     }
 }

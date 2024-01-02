@@ -70,7 +70,8 @@ class CategoryController extends Controller
 
 
     // Update method
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
         // Quiry builder
         // $data = array();
@@ -79,11 +80,11 @@ class CategoryController extends Controller
         // DB::table('categories')->where('id',$request->id)->update($data);
 
         // Eloquint ORM
-        $category = Category::where('id',$request->id)->first();
+        $category = Category::where('id', $request->id)->first();
 
         $category->update([
-            'category_name'=>$request->category_name,
-            'category_slug'=>Str::slug($request->category_name, '-'),
+            'category_name' => $request->category_name,
+            'category_slug' => Str::slug($request->category_name, '-'),
         ]);
 
         $notifications = array('messege' => 'Category Updated', 'alert-type' => 'success');
@@ -103,5 +104,13 @@ class CategoryController extends Controller
 
         $notifications = array('messege' => 'Category Deleted', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
+    }
+
+
+    // get child Category by subcategory_id
+    public function GetChildCategory($id)
+    {     // this is subcategory_id
+        $data =  DB::table('childcategories')->where('subcategory_id', $id)->get();
+        return response()->json($data);
     }
 }
