@@ -78,8 +78,9 @@ class ProductController extends Controller
 
         $category = DB::table('categories')->get();
         $brand = DB::table('brands')->get();
+        $warehouse = DB::table('warehouses')->get();
 
-        return view('admin.product.index',compact('category','brand'));
+        return view('admin.product.index',compact('category','brand','warehouse'));
     }
 
     //  product Create Page
@@ -172,7 +173,8 @@ class ProductController extends Controller
         DB::table('products')->insert($data);
 
         $notifications = array('messege' => 'Product Inserted', 'alert-type' => 'success');
-        return redirect()->back()->with($notifications);
+        // return redirect()->back()->with($notifications);
+        return redirect()->route('product.index')->with($notifications);
     }
 
 

@@ -11,8 +11,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">+ Add
-                                new</button>
+                            <a href="{{ route('product.create') }}" class="btn btn-primary">+ Add
+                                new</a>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -28,7 +28,54 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">All Product list Here</h3>
+                            </div><br>
+
+                            {{-- Filtering --}}
+                            <div class="row p-2">
+                                {{-- category --}}
+                                <div class="form-group col-3">
+                                    <label for="">Category</label>
+                                    <select name="category_id" class="form-control submitable">
+                                        <option value="">All</option>
+                                        @foreach ($category as $row)
+                                            <option value="{{ $row->id }}">{{ $row->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- brand --}}
+                                <div class="form-group col-3">
+                                    <label for="">Brand</label>
+                                    <select name="brand_id" class="form-control submitable">
+                                        <option value="">All</option>
+                                        @foreach ($brand as $row)
+                                            <option value="{{ $row->id }}">{{ $row->brand_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- Warehouse --}}
+                                <div class="form-group col-3">
+                                    <label for="">Warehouse</label>
+                                    <select name="warehouse_id" class="form-control submitable">
+                                        <option value="">All</option>
+                                        @foreach ($warehouse as $row)
+                                            <option value="{{ $row->id }}">{{ $row->warehouse_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- Status static data --}}
+                                <div class="form-group col-3">
+                                    <label for="">Status</label>
+                                    <select name="brand_id" class="form-control submitable">
+                                        <option value="">All</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+
                             </div>
+
+
+
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="" class="table table-bordered table-striped table-sm ytable">
@@ -172,9 +219,6 @@
         });
     </script>
 
-
-
-
     {{-- Active  to  Deactive 	today_deal --}}
     <script type="text/javascript">
         $('body').on('click', '.deactive_deal', function() {
@@ -210,7 +254,7 @@
     </script>
 
 
-    {{-- Active  to  Deactive 	status--}}
+    {{-- Active  to  Deactive 	status --}}
     <script type="text/javascript">
         $('body').on('click', '.deactive_status', function() {
             let id = $(this).data('id');
@@ -245,52 +289,58 @@
     </script>
 
 
- {{-- sweet alert for delete ajax call --}}
- <script>
-    $(document).ready(function() {
+    {{-- sweet alert for delete ajax call --}}
+    <script>
+        $(document).ready(function() {
 
-        $(document).on('click', '#delete_product', function(e) {
-            e.preventDefault();
-            var url = $(this).attr('href'); // route('coupon.delete', [$row->id])
+            $(document).on('click', '#delete_product', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href'); // route('coupon.delete', [$row->id])
 
-            $("#deleted_form").attr('action', url); // url = route('coupon.delete', [$row->id])
+                $("#deleted_form").attr('action', url); // url = route('coupon.delete', [$row->id])
 
-            swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this imaginary file!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $("#deleted_form").submit();
-                    } else {
-                        swal("Your imaginary file is safe!");
+                swal({
+                        title: "Are you sure?",
+                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $("#deleted_form").submit();
+                        } else {
+                            swal("Your imaginary file is safe!");
+                        }
+                    });
+            });
+
+            //data passed through here
+            $('#deleted_form').submit(function(e) {
+                e.preventDefault();
+                var url = $(this).attr('action');
+                var request = $(this).serialize();
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    async: false,
+                    data: request,
+                    success: function(data) {
+                        toastr.success(data);
+                        $('#deleted_form')[0].reset();
+                        table.ajax.reload();
                     }
                 });
-        });
-
-        //data passed through here
-        $('#deleted_form').submit(function(e) {
-            e.preventDefault();
-            var url = $(this).attr('action');
-            var request = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: 'post',
-                async: false,
-                data: request,
-                success: function(data) {
-                    toastr.success(data);
-                    $('#deleted_form')[0].reset();
-                    table.ajax.reload();
-                }
             });
-        });
 
-    })
-</script>
+        })
+    </script>
 
+    {{-- submitable class call for every change filtering --}}
+    <script>
+        $(document).on('change', '.submitable', function() {
+            $('.ytable').DataTable().ajax.reload();
+        })
+    </script>
 @endsection
 <!-- /.content-header -->
