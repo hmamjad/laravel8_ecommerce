@@ -42,9 +42,9 @@ class CreateProductsTable extends Migration
             $table->integer('flash_deal_id')->nullable();
             $table->integer('cash_on_delivery')->nullable();
             $table->integer('admin_id')->nullable(); // who add this product
-            $table->integer('date')->nullable();
-            $table->integer('month')->nullable();
-            $table->integer('year')->nullable();
+            $table->string('date')->nullable();
+            $table->string('month')->nullable();
+            $table->string('year')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
