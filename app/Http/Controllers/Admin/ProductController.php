@@ -26,7 +26,7 @@ class ProductController extends Controller
     {
 
         if ($request->ajax()) {
-            $imgurl = 'public/files/product';
+            $imgurl = 'files/product';
 
             $product="";
 
@@ -159,6 +159,7 @@ class ProductController extends Controller
         $data['featured'] = $request->featured;
         $data['today_deal'] = $request->today_deal;
         $data['status'] = $request->status;
+        $data['product_slider'] = $request->product_slider;
         $data['flash_deal_id'] = $request->flash_deal_id;
         $data['cash_on_delivery'] = $request->cash_on_delivery;
         $data['admin_id'] = Auth::id();
@@ -171,10 +172,10 @@ class ProductController extends Controller
             $slug = Str::slug($request->name, '-');
             $thumbnail = $request->thumbnail;
             $photoname = $slug . '.' . $thumbnail->getClientOriginalExtension();
-            // $thumbnail->move('public/files/product/',$photoname); //without image intervention
-            Image::make($thumbnail)->resize(600, 600)->save('public/files/product/' . $photoname); // image intervention
+            // $thumbnail->move('files/product/',$photoname); //without image intervention
+            Image::make($thumbnail)->resize(600, 600)->save('files/product/' . $photoname); // image intervention
 
-            $data['thumbnail'] = $photoname; //'public/files/product/' . $photoname
+            $data['thumbnail'] = $photoname; //'files/product/' . $photoname
         }
 
         // working with multiple imags
@@ -183,8 +184,8 @@ class ProductController extends Controller
             foreach ($request->file('images') as $key => $image) {
 
                 $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-                // $images->move('public/files/product/',$imageName); //without image intervention
-                Image::make($image)->resize(600, 600)->save('public/files/product/' . $imageName); // image intervention
+                // $images->move('files/product/',$imageName); //without image intervention
+                Image::make($image)->resize(600, 600)->save('files/product/' . $imageName); // image intervention
 
                 array_push($images, $imageName);
             }

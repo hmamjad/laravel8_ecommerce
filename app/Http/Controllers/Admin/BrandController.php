@@ -55,10 +55,10 @@ class BrandController extends Controller
         $slug = Str::slug($request->brand_name, '-');
         $photo = $request->brand_logo;
         $photoname = $slug . '.' . $photo->getClientOriginalExtension();
-        // $photo->move('public/files/brand/',$photoname); //without image intervention
-        Image::make($photo)->resize(240, 120)->save('public/files/brand/' . $photoname); // image intervention
+        // $photo->move('files/brand/',$photoname); //without image intervention
+        Image::make($photo)->resize(240, 120)->save('files/brand/' . $photoname); // image intervention
 
-        $data['brand_logo'] = 'public/files/brand/' . $photoname;
+        $data['brand_logo'] = 'files/brand/' . $photoname;
 
 
         DB::table('brands')->insert($data);
@@ -121,10 +121,10 @@ class BrandController extends Controller
             // new Image
             $photo = $request->brand_logo;
             $photoname = $slug . '.' . $photo->getClientOriginalExtension();
-            // $photo->move('public/files/brand/',$photoname); //without image intervention
-            Image::make($photo)->resize(240, 120)->save('public/files/brand/'.$photoname); // image intervention
+            // $photo->move('files/brand/',$photoname); //without image intervention
+            Image::make($photo)->resize(240, 120)->save('files/brand/'.$photoname); // image intervention
 
-            $data['brand_logo'] = 'public/files/brand/'.$photoname;
+            $data['brand_logo'] = 'files/brand/'.$photoname;
             DB::table('brands')->where('id', $request->id)->update($data);
 
             $notifications = array('messege' => 'Brand Updated', 'alert-type' => 'success');
