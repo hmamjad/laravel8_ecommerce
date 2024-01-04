@@ -35,7 +35,7 @@
                                 {{-- category --}}
                                 <div class="form-group col-3">
                                     <label for="">Category</label>
-                                    <select name="category_id" class="form-control submitable">
+                                    <select name="category_id" id="category_id" class="form-control submitable">
                                         <option value="">All</option>
                                         @foreach ($category as $row)
                                             <option value="{{ $row->id }}">{{ $row->category_name }}</option>
@@ -45,7 +45,7 @@
                                 {{-- brand --}}
                                 <div class="form-group col-3">
                                     <label for="">Brand</label>
-                                    <select name="brand_id" class="form-control submitable">
+                                    <select name="brand_id" id="brand_id" class="form-control submitable">
                                         <option value="">All</option>
                                         @foreach ($brand as $row)
                                             <option value="{{ $row->id }}">{{ $row->brand_name }}</option>
@@ -55,7 +55,7 @@
                                 {{-- Warehouse --}}
                                 <div class="form-group col-3">
                                     <label for="">Warehouse</label>
-                                    <select name="warehouse_id" class="form-control submitable">
+                                    <select name="warehouse_id" id="warehouse_id" class="form-control submitable">
                                         <option value="">All</option>
                                         @foreach ($warehouse as $row)
                                             <option value="{{ $row->id }}">{{ $row->warehouse_name }}</option>
@@ -65,8 +65,8 @@
                                 {{-- Status static data --}}
                                 <div class="form-group col-3">
                                     <label for="">Status</label>
-                                    <select name="brand_id" class="form-control submitable">
-                                        <option value="">All</option>
+                                    <select name="status" id="status" class="form-control submitable">
+                                        <option value="2">All</option>
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
@@ -131,9 +131,18 @@
     <script type="text/javascript">
         $(function product() {
             table = $('.ytable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('product.index') }}',
+                "processing": true,
+                "serverSide": true,
+                "searching": true,
+                "ajax": {
+                    "url": "{{ route('product.index') }}",
+                    "data": function(e) {
+                        e.category_id = $("#category_id").val();
+                        e.brand_id = $("#brand_id").val();
+                        e.status = $("#status").val();
+                        e.warehouse_id = $("#warehouse_id").val();
+                    }
+                },
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
