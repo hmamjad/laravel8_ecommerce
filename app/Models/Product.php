@@ -28,7 +28,7 @@ class Product extends Model
         'size',
         'video',
         'purchase_price',
-        'celling_price',
+        'selling_price',
         'discount_price',
         'stock_quantity',
         'warehouse',

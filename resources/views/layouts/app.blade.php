@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.css">
     <link href="{{ asset('frontend') }}/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet"
         type="text/css">
@@ -27,6 +28,14 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_responsive.css">
+
+
+
+ 
+
+
+    
+
 
 </head>
 
@@ -94,7 +103,7 @@
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="#">OneTech</a></div>
+                                <div class="logo"><a href="#">Equibment</a></div>
                             </div>
                         </div>
 
@@ -164,7 +173,7 @@
             @yield('navbar')
             <!-- Menu -->
 
-           
+
 
         </header>
 
@@ -297,7 +306,23 @@
     <script src="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.js"></script>
     <script src="{{ asset('frontend') }}/plugins/easing/easing.js"></script>
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
-    <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
+    {{-- <script src="{{ asset('frontend') }}/js/product_custom.js"></script> --}}
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
 
 </body>
 
