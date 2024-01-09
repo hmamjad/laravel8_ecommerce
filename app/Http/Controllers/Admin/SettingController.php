@@ -113,9 +113,9 @@ class SettingController extends Controller
             //new logo
             $logo = $request->logo;
             $logo_name = uniqid() . '.' . $logo->getClientOriginalExtension();
-            // $photo->move('public/files/brand/',$photoname); //without image intervention
-            Image::make($logo)->resize(320, 120)->save('public/files/setting/' . $logo_name); // image intervention
-            $data['logo'] = 'public/files/setting/' . $logo_name;
+            // $photo->move('files/brand/',$photoname); //without image intervention
+            Image::make($logo)->resize(320, 120)->save('files/setting/' . $logo_name); // image intervention
+            $data['logo'] = 'files/setting/' . $logo_name;
         } else {
             $data['logo'] = $request->old_logo;
         }
@@ -129,9 +129,9 @@ class SettingController extends Controller
             // new Favicon
             $favicon = $request->favicon;
             $favicon_name = uniqid() . '.' . $favicon->getClientOriginalExtension();
-            // $photo->move('public/files/brand/',$photoname); //without image intervention
-            Image::make($favicon)->resize(32, 32)->save('public/files/setting/' . $favicon_name); // image intervention
-            $data['favicon'] = 'public/files/setting/' . $favicon_name;
+            // $photo->move('files/brand/',$photoname); //without image intervention
+            Image::make($favicon)->resize(32, 32)->save('files/setting/' . $favicon_name); // image intervention
+            $data['favicon'] = 'files/setting/' . $favicon_name;
         } else {
             $data['favicon'] = $request->old_favicon;
         }

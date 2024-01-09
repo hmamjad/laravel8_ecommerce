@@ -11,6 +11,9 @@ use Image;
 use File;
 use DataTables;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\Brand;
 
 
 class ProductController extends Controller
@@ -150,7 +153,7 @@ class ProductController extends Controller
         $data['size'] = $request->size;
         $data['video'] = $request->video;
         $data['purchase_price'] = $request->purchase_price;
-        $data['celling_price'] = $request->celling_price;
+        $data['selling_price'] = $request->selling_price;
         $data['discount_price'] = $request->discount_price;
         $data['stock_quantity'] = $request->stock_quantity;
         $data['discount_price'] = $request->discount_price;
@@ -198,6 +201,20 @@ class ProductController extends Controller
         $notifications = array('messege' => 'Product Inserted', 'alert-type' => 'success');
         // return redirect()->back()->with($notifications);
         return redirect()->route('product.index')->with($notifications);
+    }
+
+    // Edit product
+
+    public function edit($id){
+        $product = DB::table('products')->where('id',$id)->first(); // $product = Product::findorfail($id);
+        $category = Category::all();
+        $subcategory = Subcategory::all();
+        $brand = Brand::all();
+        $pickup_point = DB::table('pickup_point')->get();
+        $warehouse = DB::table('warehouses')->get();
+       
+        return view('admin.product.edit',compact('product','category','subcategory','brand','pickup_point','warehouse'));
+
     }
 
 

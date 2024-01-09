@@ -142,7 +142,7 @@
                                     <div class="row">
                                         <div class="form-group col-lg-4">
                                             <label for="exampleInput">Purchase Price </label>
-                                            <input type="text" class="form-control" {{ old('purchase_price') }}
+                                            <input type="text" class="form-control" value="{{ old('purchase_price') }}"
                                                 name="purchase_price">
                                         </div>
                                         <div class="form-group col-lg-4">
@@ -235,7 +235,7 @@
                                     </div>
                                     <div class="card p-4">
                                         <h6>Featured Product</h6>
-                                        <input type="checkbox" name="featured" value="1" checked
+                                        <input type="checkbox" name="featured" value="1"  checked
                                             data-bootstrap-switch data-off-color="danger" data-on-color="success">
                                     </div>
 
