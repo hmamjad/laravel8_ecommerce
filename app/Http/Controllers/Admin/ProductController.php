@@ -31,73 +31,73 @@ class ProductController extends Controller
         if ($request->ajax()) {
             $imgurl = 'files/product';
 
-            $product="";
+            $product = "";
 
             $query = DB::table('products')
-            ->leftJoin('categories','products.category_id','categories.id')
-            ->leftJoin('subcategories','products.subcategory_id','subcategories.id')
-            ->leftJoin('brands','products.brand_id','brands.id')
-            ->leftJoin('warehouses','products.warehouse','warehouses.id');
+                ->leftJoin('categories', 'products.category_id', 'categories.id')
+                ->leftJoin('subcategories', 'products.subcategory_id', 'subcategories.id')
+                ->leftJoin('brands', 'products.brand_id', 'brands.id')
+                ->leftJoin('warehouses', 'products.warehouse', 'warehouses.id');
 
-            
+
             if ($request->category_id) {
-                $query->where('products.category_id',$request->category_id);
-             }
+                $query->where('products.category_id', $request->category_id);
+            }
 
             if ($request->brand_id) {
-                $query->where('products.brand_id',$request->brand_id);
+                $query->where('products.brand_id', $request->brand_id);
             }
 
             if ($request->warehouse_id) {
-                $query->where('products.warehouse',$request->warehouse_id);
+                $query->where('products.warehouse', $request->warehouse_id);
             }
 
-            if ($request->status==1) {
-                $query->where('products.status',1);
+            if ($request->status == 1) {
+                $query->where('products.status', 1);
             }
-            if ($request->status==0) {
-                $query->where('products.status',0);
+            if ($request->status == 0) {
+                $query->where('products.status', 0);
             }
 
-        $product=$query->select('products.*','categories.category_name','subcategories.subcategory_name','brands.brand_name')
+            $product = $query->select('products.*', 'categories.category_name', 'subcategories.subcategory_name', 'brands.brand_name')
                 ->get();
 
 
             return DataTables::of($product)
                 ->addIndexColumn()
-                ->editColumn('thumbnail',function($row) use($imgurl) {
-                    return '<img src="'.$imgurl.'/'.$row->thumbnail.'" height="30" width="30">';
+                ->editColumn('thumbnail', function ($row) use ($imgurl) {
+                    return '<img src="' . $imgurl . '/' . $row->thumbnail . '" height="30" width="30">';
                 })
-                ->editColumn('featured',function($row){
-                    if($row->featured == 1){
-                        return '<a href="#" data-id="'.$row->id.'" class="deactive_featured"><i class="fas fa-thumbs-down text-danger"></i> <span class="badge badge-success">active</span> </a>';
-                    }else{
-                        return '<a href="#" data-id="'.$row->id.'" class="active_featured"><i class="fas fa-thumbs-up text-success"></i> <span class="badge badge-danger">Deactive</span> </a>';
+                ->editColumn('featured', function ($row) {
+                    if ($row->featured == 1) {
+                        return '<a href="#" data-id="' . $row->id . '" class="deactive_featured"><i class="fas fa-thumbs-down text-danger"></i> <span class="badge badge-success">active</span> </a>';
+                    } else {
+                        return '<a href="#" data-id="' . $row->id . '" class="active_featured"><i class="fas fa-thumbs-up text-success"></i> <span class="badge badge-danger">Deactive</span> </a>';
                     }
                 })
-                ->editColumn('today_deal',function($row){
-                    if($row->today_deal == 1){
-                        return '<a href="#" data-id="'.$row->id.'" class="deactive_deal"><i class="fas fa-thumbs-down text-danger"></i> <span class="badge badge-success">active</span> </a>';
-                    }else{
-                        return '<a href="#" data-id="'.$row->id.'" class="active_deal"><i class="fas fa-thumbs-up text-success"></i> <span class="badge badge-danger">Deactive</span> </a>';
+                ->editColumn('today_deal', function ($row) {
+                    if ($row->today_deal == 1) {
+                        return '<a href="#" data-id="' . $row->id . '" class="deactive_deal"><i class="fas fa-thumbs-down text-danger"></i> <span class="badge badge-success">active</span> </a>';
+                    } else {
+                        return '<a href="#" data-id="' . $row->id . '" class="active_deal"><i class="fas fa-thumbs-up text-success"></i> <span class="badge badge-danger">Deactive</span> </a>';
                     }
                 })
-                ->editColumn('status',function($row){
-                    if($row->status == 1){
-                        return '<a href="#" data-id="'.$row->id.'" class="deactive_status"><i class="fas fa-thumbs-down text-danger"></i> <span class="badge badge-success">active</span> </a>';
-                    }else{
-                        return '<a href="#" data-id="'.$row->id.'" class="active_status"><i class="fas fa-thumbs-up text-success"></i> <span class="badge badge-danger">Deactive</span> </a>';
+                ->editColumn('status', function ($row) {
+                    if ($row->status == 1) {
+                        return '<a href="#" data-id="' . $row->id . '" class="deactive_status"><i class="fas fa-thumbs-down text-danger"></i> <span class="badge badge-success">active</span> </a>';
+                    } else {
+                        return '<a href="#" data-id="' . $row->id . '" class="active_status"><i class="fas fa-thumbs-up text-success"></i> <span class="badge badge-danger">Deactive</span> </a>';
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    $actionbtn = '<a href="' . route('product.edit', [$row->id]) . '" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-
-                                   <a href="#" class="btn btn-primary btn-sm edit"><i class="fas fa-eye"></i></a>
-                                    
+                    $actionbtn = '<a href="#" class="btn btn-primary btn-sm edit"><i class="fas fa-eye"></i></a>
+                    
+                                  <a href="' . route('product.edit', [$row->id]) . '" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                  
                                    <a href="' . route('product.delete', [$row->id]) . '" id="delete_product" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
                     return  $actionbtn;
                 })
-                ->rawColumns(['action','category_name','subcategory_name','brand_name','thumbnail','featured','today_deal','status'])
+                ->rawColumns(['action', 'category_name', 'subcategory_name', 'brand_name', 'thumbnail', 'featured', 'today_deal', 'status'])
                 ->make(true);
         }
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
         $brand = DB::table('brands')->get();
         $warehouse = DB::table('warehouses')->get();
 
-        return view('admin.product.index',compact('category','brand','warehouse'));
+        return view('admin.product.index', compact('category', 'brand', 'warehouse'));
     }
 
     //  product Create Page
@@ -205,61 +205,63 @@ class ProductController extends Controller
 
     // Edit product
 
-    public function edit($id){
-        $product = DB::table('products')->where('id',$id)->first(); // $product = Product::findorfail($id);
+    public function edit($id)
+    {
+        $product = DB::table('products')->where('id', $id)->first(); // $product = Product::findorfail($id);
         $category = Category::all();
         $subcategory = Subcategory::all();
         $brand = Brand::all();
         $pickup_point = DB::table('pickup_point')->get();
         $warehouse = DB::table('warehouses')->get();
-       
-        return view('admin.product.edit',compact('product','category','subcategory','brand','pickup_point','warehouse'));
 
+        return view('admin.product.edit', compact('product', 'category', 'subcategory', 'brand', 'pickup_point', 'warehouse'));
     }
 
 
     // Active to Deactive featured
-    public function notfeatured($id){
-        DB::table('products')->where('id',$id)->update(['featured' => 0]);
+    public function notfeatured($id)
+    {
+        DB::table('products')->where('id', $id)->update(['featured' => 0]);
         return response()->json("Featured Deactived");
     }
     //  Deactive to Active featured
-    public function activefeatured($id){
-        DB::table('products')->where('id',$id)->update(['featured' => 1]);
+    public function activefeatured($id)
+    {
+        DB::table('products')->where('id', $id)->update(['featured' => 1]);
         return response()->json("Featured Actived");
     }
 
     // Active to Deactive today_deal
-    public function notdeal($id){
-        DB::table('products')->where('id',$id)->update(['today_deal' => 0]);
+    public function notdeal($id)
+    {
+        DB::table('products')->where('id', $id)->update(['today_deal' => 0]);
         return response()->json("Deal Deactived");
     }
 
     // Deactive to Active  today_deal
-    public function activedeal($id){
-        DB::table('products')->where('id',$id)->update(['today_deal' => 1]);
+    public function activedeal($id)
+    {
+        DB::table('products')->where('id', $id)->update(['today_deal' => 1]);
         return response()->json("Deal Actived");
     }
     // Active to Deactive Status
-    public function notstatus($id){
-        DB::table('products')->where('id',$id)->update(['status' => 0]);
+    public function notstatus($id)
+    {
+        DB::table('products')->where('id', $id)->update(['status' => 0]);
         return response()->json("Status Deactived");
     }
 
     // Deactive to Active  Status
-    public function activestatus($id){
-        DB::table('products')->where('id',$id)->update(['status' => 1]);
+    public function activestatus($id)
+    {
+        DB::table('products')->where('id', $id)->update(['status' => 1]);
         return response()->json("Status Deactived");
     }
 
     // Product Delete
-    public function destroy($id){
-        DB::table('products')->where('id',$id)->delete();
+    public function destroy($id)
+    {
+        DB::table('products')->where('id', $id)->delete();
         return response()->json("successfully Deleted!");
     }
-
-    
-
-
-
 }

@@ -27,11 +27,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
 
 Route::get('/','IndexController@index');
+Route::get('/product-details/{slug}','IndexController@ProductDetails')->name('product.details');
 
 });
 
 
 
-Route::get('/frontend/product', function () {
-    return view('frontend.product_details');
-});
+// Route::get('/frontend/product', function () {
+//     return view('frontend.product_details');
+// });

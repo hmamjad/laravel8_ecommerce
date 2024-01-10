@@ -30,13 +30,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_responsive.css">
 
 
-
- 
-
-
-    
-
-
 </head>
 
 <body>
@@ -103,7 +96,7 @@
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="#">Equibment</a></div>
+                                <div class="logo"><a href="{{url('/')}}">Equibment</a></div>
                             </div>
                         </div>
 
@@ -306,21 +299,7 @@
     <script src="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.js"></script>
     <script src="{{ asset('frontend') }}/plugins/easing/easing.js"></script>
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
-    {{-- <script src="{{ asset('frontend') }}/js/product_custom.js"></script> --}}
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
+    <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
 
 
 
