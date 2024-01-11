@@ -28,6 +28,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/plugins/toastr/toastr.css') }}">
 
 
 </head>
@@ -57,7 +58,7 @@
                                     href="learnhunter18@gmail.com">learnhunter18@gmail.com</a>
                             </div>
                             <div class="top_bar_content ml-auto">
-                                <div class="top_bar_menu">
+                                {{-- <div class="top_bar_menu">
                                     <ul class="standard_dropdown top_bar_dropdown">
                                         <li>
                                             <a href="#">English<i class="fas fa-chevron-down"></i></a>
@@ -74,13 +75,77 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                </div> --}}
+
+                                @if(Auth::check())
+                                <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown" >
+                                        <li>
+                                            <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
+                                            <ul style="width:200px;">
+                                                <li><a href="{{ route('home') }}">Profile</a></li>
+                                                <li><a href="{{ route('customer.logout') }}">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                      
+                                    </ul>
                                 </div>
-                                <div class="top_bar_user">
+                                @endif
+
+                                @guest
+                                <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                        <li>
+                                            <a href="#">Login<i class="fas fa-chevron-down"></i></a>
+                                            <ul style="width:300px; padding:10px;">
+                                               <div>
+                                                <strong>login your account</strong><br>
+                                                <br>
+                                                   <form action="{{ route('login') }}" method="post">
+                                                    @csrf
+                                                       <div class="form-group">
+                                                           <label>Email Address</label>
+                                                           <input type="email" class="form-control" name="email" autocomplete="off" required="">
+                                                       </div>
+                                                       <div class="form-group">
+                                                           <label>Password</label>
+                                                           <input type="password" class="form-control" name="password" required="">
+                                                       </div>
+                                                       <div class="form-group row">
+                                                           <div class="offset-md-2">
+                                                               <div class="form-check">
+                                                                   <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+    
+                                                                   <label class="form-check-label" for="remember">
+                                                                       {{ __('Remember Me') }}
+                                                                   </label>
+                                                               </div>
+                                                           </div>
+                                                       </div>
+                                                       <div class="form-group">
+                                                           <button type="submit" class="btn btn-sm btn-info">login</button>
+                                                       </div>
+                                                   </form>
+                                                   <div class="form-group">
+                                                     <a href="#" class="btn btn-danger btn-sm btn-block text-white">Login WIth Google</a>
+                                                    </div>
+                                               </div>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                        <a href="{{ route('register') }}">Register</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @endguest
+
+
+                                {{-- <div class="top_bar_user">
                                     <div class="user_icon"><img src="{{ asset('frontend') }}/images/user.svg"
                                             alt=""></div>
                                     <div><a href="#">Register</a></div>
                                     <div><a href="#">Sign in</a></div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -300,6 +365,36 @@
     <script src="{{ asset('frontend') }}/plugins/easing/easing.js"></script>
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
     <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
+    <script type="text/javascript" src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+
+     {{-- Toster part --}}
+     <script>
+        @if (Session::has('messege'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+
+            toastr.options = {
+                "positionClass": "toast-top-right", // You can change this to other positions as needed
+                // Other options...
+                "closeButton": true,
+                "progressBar": true
+            };
+
+            switch (type) {
+                case 'info':
+                    toastr.info("{{ Session::get('messege') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ Session::get('messege') }}");
+                    break;
+                case 'warning':
+                    toastr.warning("{{ Session::get('messege') }}");
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('messege') }}");
+                    break;
+            }
+        @endif
+    </script>
 
 
 
