@@ -98,7 +98,7 @@
                                     <!-- Deals Item -->
                                     <div class="owl-item deals_item">
                                         <div class="deals_image"><img
-                                                src="{{ asset('public/files/product/' . $row->thumbnail) }}"
+                                                src="{{ asset('files/product/' . $row->thumbnail) }}"
                                                 alt="{{ $row->name }}"></div>
                                         <div class="deals_content">
                                             <div class="deals_info_line d-flex flex-row justify-content-start">
@@ -472,7 +472,7 @@
                             <div class="advert_text">Lorem ipsum dolor sit amet, consectetur.</div>
                         </div>
                         <div class="ml-auto">
-                            <div class="advert_image"><img src="{{ asset('public/frontend') }}/images/adv_2.png"
+                            <div class="advert_image"><img src="{{ asset('frontend') }}/images/adv_2.png"
                                     alt=""></div>
                         </div>
                     </div>
@@ -488,7 +488,7 @@
                             <div class="advert_text">Lorem ipsum dolor sit amet, consectetur.</div>
                         </div>
                         <div class="ml-auto">
-                            <div class="advert_image"><img src="{{ asset('public/frontend') }}/images/adv_3.png"
+                            <div class="advert_image"><img src="{{ asset('frontend') }}/images/adv_3.png"
                                     alt=""></div>
                         </div>
                     </div>
@@ -528,17 +528,18 @@
                         <!-- Trends Slider -->
 
                         <div class="owl-carousel owl-theme trends_slider">
-                            {{-- 
+                            
                             @foreach ($trendy_product as $row)
                                 <!-- Trends Slider Item -->
                                 <div class="owl-item">
                                     <div class="trends_item is_new">
                                         <div
                                             class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{ asset('public/files/product/' . $row->thumbnail) }}"
+                                            <img src="{{ asset('files/product/' . $row->thumbnail) }}"
                                                 alt="">
                                         </div>
                                         <div class="trends_content">
+
                                             <div class="trends_category"><a
                                                     href="#">{{ $row->category->category_name }}</a>
                                                 <div class="trends_price">
@@ -558,19 +559,23 @@
                                                         href="{{ route('product.details', $row->slug) }}">{{ substr($row->name, 0, 20) }}..</a>
                                                 </div>
                                             </div>
+                                           
                                         </div>
-                                    </div>
-                                    <ul class="trends_marks">
-                                        <li class="trends_mark trends_discount">-25%</li>
-                                        <a href="" class="trends_mark trends_new">
-                                            <i class="fa fa-eye"></i>
+                                        <ul class="trends_marks">
+                                            {{-- <li class="trends_mark trends_discount">-25%</li> --}}
+                                            <a href="" class="trends_mark trends_new">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </ul>
+                                       
+                                        <a href="{{ route('add.wishlist', $row->id) }}">
+                                            <div class="trends_fav"><i class="fas fa-heart"></i></div>
                                         </a>
-                                    </ul>
-                                    <a href="{{ route('add.wishlist', $row->id) }}">
-                                        <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                                    </a>
+                                        
+                                    </div>
+                                    {{--  --}}
                                 </div>
-                            @endforeach --}}
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -853,6 +858,8 @@
         //ajax request send for collect childcategory
         $(document).on('click', '.quick_view', function() {
             var id = $(this).attr("id");
+
+            
             $.ajax({
                 url: "{{ url('/product-quick-view/') }}/" + id,
                 type: 'get',

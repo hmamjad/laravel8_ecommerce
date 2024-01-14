@@ -26,7 +26,7 @@ class IndexController extends Controller
         $featured=Product::where('status',1)->where('featured',1)->orderBy('id','DESC')->limit(16)->get();
         $todaydeal=Product::where('status',1)->where('today_deal',1)->orderBy('id','DESC')->limit(6)->get();
         $popular_product=Product::where('status',1)->orderBy('product_views','DESC')->limit(16)->get();
-        // $trendy_product=Product::where('status',1)->where('trendy',1)->orderBy('id','DESC')->limit(8)->get();
+        $trendy_product=Product::where('status',1)->where('trendy',1)->orderBy('id','DESC')->limit(8)->get();
         $random_product=Product::where('status',1)->inRandomOrder()->limit(16)->get();
         // $review=DB::table('wbreviews')->where('status',1)->orderBy('id','DESC')->limit(12)->get();
         //homepage category
@@ -35,7 +35,7 @@ class IndexController extends Controller
 
         // $campaign=DB::table('campaigns')->where('status',1)->orderBy('id','DESC')->first();
 
-        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','brand','random_product','todaydeal'));
+        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','trendy_product','brand','random_product','todaydeal'));
     }
 
     // singleProduct page calling Method
@@ -44,7 +44,7 @@ class IndexController extends Controller
          Product::where('slug',$slug)->increment('product_views');
         $related_product=DB::table('products')->where('subcategory_id',$product->subcategory_id)->orderBy('id','DESC')->take(10)->get();  //take(10) == limit(10)
         $review=Review::where('product_id',$product->id)->orderBy('id','DESC')->take(6)->get();
-        return view('frontend.product_details',compact('product','related_product','review'));
+        return view('frontend.product.product_details',compact('product','related_product','review'));
     }
 
 
@@ -52,6 +52,8 @@ class IndexController extends Controller
      public function ProductQuickView($id)
      {
          $product=Product::where('id',$id)->first();
+        //  return response()->json($product);
          return view('frontend.product.quick_view',compact('product'));
+        
      }
 }
