@@ -40,6 +40,8 @@ Route::get('/product-details/{slug}','IndexController@ProductDetails')->name('pr
 Route::post('/store/review','ReviewController@store')->name('store.review');
 // Wishlist
 Route::get('/add/wishlist/{id}','ReviewController@AddWishlist')->name('add.wishlist');
+// product-quick-view
+Route::get('/product-quick-view/{id}','IndexController@ProductQuickView');
 
 });
 

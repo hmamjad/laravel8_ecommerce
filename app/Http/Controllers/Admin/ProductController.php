@@ -163,6 +163,7 @@ class ProductController extends Controller
         $data['today_deal'] = $request->today_deal;
         $data['status'] = $request->status;
         $data['product_slider'] = $request->product_slider;
+        $data['trendy'] = $request->trendy;
         $data['flash_deal_id'] = $request->flash_deal_id;
         $data['cash_on_delivery'] = $request->cash_on_delivery;
         $data['admin_id'] = Auth::id();
