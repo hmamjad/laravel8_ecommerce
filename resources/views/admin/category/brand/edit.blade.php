@@ -17,6 +17,15 @@
             <small id="emailHelp" class="form-text text-muted">This is your Brand logo</small>
         </div>
 
+        <div class="form-group">
+            <label for="front_page">Home Page</label>
+            <select name="front_page" id="front_page" class="form-control">
+                <option value="1" @if($data->front_page==1) selected="" @endif>Yes</option>
+                <option value="0" @if($data->front_page==0) selected="" @endif>No</option>
+            </select>
+            <small id="emailHelp" class="form-text text-muted">If Yes,it will be show on your Home page</small>
+        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

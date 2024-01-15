@@ -67,7 +67,7 @@
                 @foreach ($brand as $row)
                     <div class="col-lg-1 col-md-6 char_col" style="border:1px solid grey; padding:5px;">
                         <div class="brands_item">
-                            <a href="#" title="{{ $row->brand_name }}">  {{-- {{ route('brandwise.product', $row->id) }} --}}
+                            <a href="#" title="{{ $row->brand_name }}"> {{-- {{ route('brandwise.product', $row->id) }} --}}
                                 <img src="{{ asset($row->brand_logo) }}" alt="{{ $row->brand_name }}" height="100%"
                                     width="100%">
                             </a>
@@ -229,7 +229,7 @@
                                                     <li class="product_mark product_discount">new</li>
 
                                                 </ul>
-                                            </div><br>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -425,7 +425,7 @@
                                                             </div>
                                                         </a>
 
-                                                    </div><br>
+                                                    </div>
                                                 </div>
                                             @endforeach
 
@@ -728,9 +728,9 @@
                             @foreach ($brand as $row)
                                 <div class="owl-item">
                                     <div class="brands_item d-flex flex-column justify-content-center">
-                                        <a href="#"         {{-- {{ route('brandwise.product', $row->id) }} --}}
-                                            title="{{ $row->brand_name }}"> <img src="{{ asset($row->brand_logo) }}"
-                                                alt="{{ $row->brand_name }}" height="50" width="40"> </a>
+                                        <a href="#" {{-- {{ route('brandwise.product', $row->id) }} --}} title="{{ $row->brand_name }}"> <img
+                                                src="{{ asset($row->brand_logo) }}" alt="{{ $row->brand_name }}"
+                                                height="50" width="40"> </a>
                                     </div>
                                 </div>
                             @endforeach

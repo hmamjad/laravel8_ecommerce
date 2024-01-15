@@ -241,7 +241,7 @@
 
                                     <div class="card p-4">
                                         <h6>Today Deal</h6>
-                                        <input type="checkbox" name="today_deal" value="1" checked
+                                        <input type="checkbox" name="today_deal" value="1" 
                                             data-bootstrap-switch data-off-color="danger" data-on-color="success">
                                     </div>
 

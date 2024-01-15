@@ -26,6 +26,11 @@ class BrandController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->editColumn('front_page', function ($row) {
+                    if ($row->front_page == 1) {
+                        return '<span class="badge badge-success">Home Page</span>';
+                    }
+                })
                 ->addColumn('action', function ($row) {
                     $actionbtn = '<a href="#" class="btn btn-info btn-sm edit" data-id=" ' . $row->id . ' " 
                  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></a>
@@ -33,7 +38,7 @@ class BrandController extends Controller
                  <a href="' . route('brand.delete', [$row->id]) . '" id="delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
                     return  $actionbtn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','front_page'])
                 ->make(true);
         }
 
@@ -51,6 +56,7 @@ class BrandController extends Controller
         $data = array();
         $data['brand_name'] = $request->brand_name;
         $data['brand_slug'] = Str::slug($request->brand_name, '-');
+        $data['front_page'] = $request->front_page;
         // working with image
         $slug = Str::slug($request->brand_name, '-');
         $photo = $request->brand_logo;
@@ -109,6 +115,7 @@ class BrandController extends Controller
         $data = array();
         $data['brand_name'] = $request->brand_name;
         $data['brand_slug'] = Str::slug($request->brand_name, '-');
+        $data['front_page'] = $request->front_page;
         // working wit image
         $slug = Str::slug($request->brand_name, '-'); // this is for name or ui_id
         

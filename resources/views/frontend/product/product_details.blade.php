@@ -3,8 +3,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_responsive.css">
     {{-- <script src="{{ asset('js/share.js') }}"></script> --}}
+   
 
     @include('layouts.front_partial.collaps_nav')
+
+  
 
     <style type="text/css">
         .checked {
@@ -502,6 +505,8 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+    
     <script type="text/javascript">
         //store coupon ajax call
         $('#add_to_cart').submit(function(e) {
@@ -521,5 +526,7 @@
             });
         });
     </script>
+
+
 
 @endsection

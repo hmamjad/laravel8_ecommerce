@@ -39,6 +39,7 @@
                                             <th>Brand Name</th>
                                             <th>Brand Slug</th>
                                             <th>Brand Logo</th>
+                                            <th>Home Page</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -89,6 +90,15 @@
                             <input type="file" class="form-control dropify" data-height='140' id="input-file-now"
                                 name="brand_logo" required="">
                             <small id="emailHelp" class="form-text text-muted">This is your Brand logo</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="front_page">Home Page</label>
+                            <select name="front_page" id="front_page" class="form-control">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <small id="emailHelp" class="form-text text-muted">If Yes,it will be show on your Home page</small>
                         </div>
 
                     </div>
@@ -152,6 +162,10 @@
                         render: function(data, type, full, meta) {
                             return "<img src=\"" + data + "\" height = \"30\" />";
                         }
+                    },
+                    {
+                        data: 'front_page',
+                        name: 'front_page'
                     },
                     {
                         data: 'action',
