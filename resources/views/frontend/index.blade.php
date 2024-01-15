@@ -11,8 +11,8 @@
 
 
     <div class="banner">
-        <div class="banner_background"
-            style="background-image:url({{ asset('public/frontend') }}/images/banner_background.jpg)"></div>
+        <div class="banner_background" style="background-image:url({{ asset('frontend') }}/images/banner_background.jpg)">
+        </div>
         <div class="container fill_height">
             <div class="row fill_height">
                 <div class="banner_product_image"><img src="{{ asset('files/product/' . $bannerproduct->thumbnail) }}"
@@ -67,7 +67,7 @@
                 @foreach ($brand as $row)
                     <div class="col-lg-1 col-md-6 char_col" style="border:1px solid grey; padding:5px;">
                         <div class="brands_item">
-                            <a href="{{ route('brandwise.product', $row->id) }}" title="{{ $row->brand_name }}">
+                            <a href="#" title="{{ $row->brand_name }}">  {{-- {{ route('brandwise.product', $row->id) }} --}}
                                 <img src="{{ asset($row->brand_logo) }}" alt="{{ $row->brand_name }}" height="100%"
                                     width="100%">
                             </a>
@@ -97,8 +97,7 @@
                                 @foreach ($todaydeal as $row)
                                     <!-- Deals Item -->
                                     <div class="owl-item deals_item">
-                                        <div class="deals_image"><img
-                                                src="{{ asset('files/product/' . $row->thumbnail) }}"
+                                        <div class="deals_image"><img src="{{ asset('files/product/' . $row->thumbnail) }}"
                                                 alt="{{ $row->name }}"></div>
                                         <div class="deals_content">
                                             <div class="deals_info_line d-flex flex-row justify-content-start">
@@ -242,9 +241,9 @@
                             <div class="product_panel panel">
                                 <div class="featured_slider slider">
 
-                                    @foreach ($popular_product as $row) 
-                                         <!-- Slider Item -->
-                                         <div class="featured_slider_item">
+                                    @foreach ($popular_product as $row)
+                                        <!-- Slider Item -->
+                                        <div class="featured_slider_item">
                                             <div class="border_active"></div>
                                             <div
                                                 class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
@@ -290,7 +289,7 @@
                                                 </ul>
                                             </div><br>
                                         </div>
-                                   @endforeach
+                                    @endforeach
 
                                 </div>
                                 <div class="featured_slider_dots_cover"></div>
@@ -331,18 +330,20 @@
                 <div class="col-lg-9">
                     <div class="popular_categories_slider_container">
                         <div class="owl-carousel owl-theme popular_categories_slider">
-                            {{-- @foreach ($category as $row) 
-                            <!-- Popular Categories Item -->
-                            <div class="owl-item">
-                                <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                    <div class="popular_category_image">
-                                        <img src="{{ asset($row->icon) }}" alt="{{ $row->category_name }}"></div>
-                                    <div class="popular_category_text">
-                                      <a href="{{ route('categorywise.product',$row->id) }}">  {{ $row->category_name }} </a>
+                            @foreach ($category as $row)
+                                <!-- Popular Categories Item -->
+                                <div class="owl-item">
+                                    <div
+                                        class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                        <div class="popular_category_image">
+                                            <img src="{{ asset($row->icon) }}" alt="{{ $row->category_name }}">
+                                        </div>
+                                        <div class="popular_category_text">
+                                            <a href=""> {{ $row->category_name }} </a> {{-- {{ route('categorywise.product',$row->id) }} --}}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                           @endforeach  --}}
+                            @endforeach
 
                         </div>
                     </div>
@@ -353,7 +354,7 @@
 
     <!-- Home Category wise product-->
 
-    {{-- @foreach ($home_category as $row)
+    @foreach ($home_category as $row)
         @php
             $cat_product = DB::table('products')
                 ->where('category_id', $row->id)
@@ -387,7 +388,7 @@
                                                         class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
                                                         <div
                                                             class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                            <img src="{{ asset('public/files/product/' . $row->thumbnail) }}"
+                                                            <img src="{{ asset('files/product/' . $row->thumbnail) }}"
                                                                 alt="{{ $row->name }}" height="100%" width="55%">
                                                         </div>
                                                         <div class="product_content">
@@ -424,7 +425,7 @@
                                                             </div>
                                                         </a>
 
-                                                    </div>
+                                                    </div><br>
                                                 </div>
                                             @endforeach
 
@@ -438,7 +439,7 @@
                 </div>
             </div>
         </div>
-    @endforeach --}}
+    @endforeach
 
 
     <div class="adverts">
@@ -502,7 +503,7 @@
 
     <div class="trends">
         <div class="trends_background"
-            style="background-image:url({{ asset('public/frontend') }}/images/trends_background.jpg)"></div>
+            style="background-image:url({{ asset('frontend') }}/images/trends_background.jpg)"></div>
         <div class="trends_overlay"></div>
         <div class="container">
             <div class="row">
@@ -528,15 +529,14 @@
                         <!-- Trends Slider -->
 
                         <div class="owl-carousel owl-theme trends_slider">
-                            
+
                             @foreach ($trendy_product as $row)
                                 <!-- Trends Slider Item -->
                                 <div class="owl-item">
                                     <div class="trends_item is_new">
                                         <div
                                             class="trends_image d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{ asset('files/product/' . $row->thumbnail) }}"
-                                                alt="">
+                                            <img src="{{ asset('files/product/' . $row->thumbnail) }}" alt="">
                                         </div>
                                         <div class="trends_content">
 
@@ -559,7 +559,7 @@
                                                         href="{{ route('product.details', $row->slug) }}">{{ substr($row->name, 0, 20) }}..</a>
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
                                         <ul class="trends_marks">
                                             {{-- <li class="trends_mark trends_discount">-25%</li> --}}
@@ -567,11 +567,11 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         </ul>
-                                       
+
                                         <a href="{{ route('add.wishlist', $row->id) }}">
                                             <div class="trends_fav"><i class="fas fa-heart"></i></div>
                                         </a>
-                                        
+
                                     </div>
                                     {{--  --}}
                                 </div>
@@ -583,7 +583,7 @@
 
         </div>
     </div>
-    
+
 
     <!-- Reviews -->
 
@@ -606,7 +606,7 @@
                                 <div class="owl-item">
                                     <div class="review d-flex flex-row align-items-start justify-content-start">
                                         <div>
-                                            <div class="review_image"><img src="{{ asset('public/files/dummy.jpg') }}"
+                                            <div class="review_image"><img src="{{ asset('files/dummy.jpg') }}"
                                                     alt=""></div>
                                         </div>
                                         <div class="review_content">
@@ -728,7 +728,7 @@
                             @foreach ($brand as $row)
                                 <div class="owl-item">
                                     <div class="brands_item d-flex flex-column justify-content-center">
-                                        <a href="{{ route('brandwise.product', $row->id) }}"
+                                        <a href="#"         {{-- {{ route('brandwise.product', $row->id) }} --}}
                                             title="{{ $row->brand_name }}"> <img src="{{ asset($row->brand_logo) }}"
                                                 alt="{{ $row->brand_name }}" height="50" width="40"> </a>
                                     </div>
@@ -756,8 +756,8 @@
                 <div class="col-lg-3 col-md-6 char_col">
 
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="{{ asset('public/frontend') }}/images/char_1.png"
-                                alt=""></div>
+                        <div class="char_icon"><img src="{{ asset('frontend') }}/images/char_1.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title">Free Delivery</div>
                             <div class="char_subtitle">from $50</div>
@@ -768,8 +768,8 @@
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="{{ asset('public/frontend') }}/images/char_2.png"
-                                alt=""></div>
+                        <div class="char_icon"><img src="{{ asset('frontend') }}/images/char_2.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title">Free Delivery</div>
                             <div class="char_subtitle">from $50</div>
@@ -779,8 +779,8 @@
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="{{ asset('public/frontend') }}/images/char_3.png"
-                                alt=""></div>
+                        <div class="char_icon"><img src="{{ asset('frontend') }}/images/char_3.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title">Free Delivery</div>
                             <div class="char_subtitle">from $50</div>
@@ -790,8 +790,8 @@
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="char_icon"><img src="{{ asset('public/frontend') }}/images/char_4.png"
-                                alt=""></div>
+                        <div class="char_icon"><img src="{{ asset('frontend') }}/images/char_4.png" alt="">
+                        </div>
                         <div class="char_content">
                             <div class="char_title">Free Delivery</div>
                             <div class="char_subtitle">from $50</div>
@@ -812,7 +812,7 @@
                     <div
                         class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
                         <div class="newsletter_title_container">
-                            <div class="newsletter_icon"><img src="{{ asset('public/frontend') }}/images/send.png"
+                            <div class="newsletter_icon"><img src="{{ asset('frontend') }}/images/send.png"
                                     alt=""></div>
                             <div class="newsletter_title">Sign up for Newsletter</div>
                             <div class="newsletter_text">
@@ -859,7 +859,7 @@
         $(document).on('click', '.quick_view', function() {
             var id = $(this).attr("id");
 
-            
+
             $.ajax({
                 url: "{{ url('/product-quick-view/') }}/" + id,
                 type: 'get',

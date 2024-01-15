@@ -36,6 +36,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/update', 'SubcategoryController@update')->name('subcategory.update');
     });
 
+
+  
+
     // Childcategory route
     Route::group(['prefix' => 'childcategory'], function () {
 
@@ -92,7 +95,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/store', 'CampaignController@store')->name('campaign.store');
         Route::get('/delete/{id}', 'CampaignController@destroy')->name('campaign.delete');
         Route::get('/edit/{id}', 'CampaignController@edit');
-        // Route::post('/update', 'CouponController@update')->name('update.coupon');
+        Route::post('/update', 'CampaignController@update')->name('campaign.update');
     });
 
     // Warehouse route

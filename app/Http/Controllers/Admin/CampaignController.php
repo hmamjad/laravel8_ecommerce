@@ -119,4 +119,46 @@ class CampaignController extends Controller
     }
 
 
+     // Update method
+
+     public function update(Request $request)
+     {
+         // quirybuilder
+         $data = array();
+         $data['title'] = $request->title;
+         $data['start_date'] = $request->start_date;
+         $data['end_date'] = $request->end_date;
+         $data['status'] = $request->status;
+         $data['discount'] = $request->discount;
+         // working wit image
+         $slug = Str::slug($request->title, '-'); // this is for name or ui_id
+         
+         if ($request->image) {
+             // delete old image
+             if (File::exists($request->old_image)) {
+ 
+                 unlink($request->old_image);
+             }
+             // new Image
+             $photo = $request->image;
+             $photoname = $slug . '.' . $photo->getClientOriginalExtension();
+             // $photo->move('files/campaign/',$photoname); //without image intervention
+             Image::make($photo)->resize(468, 90)->save('files/campaign/'.$photoname); // image intervention
+ 
+             $data['image'] = 'files/campaign/'.$photoname;
+             DB::table('campaigns')->where('id', $request->id)->update($data);
+ 
+             $notifications = array('messege' => 'Campaign Updated', 'alert-type' => 'success');
+             return redirect()->back()->with($notifications);
+ 
+         } else {
+             $data['image'] = $request->old_image;
+             DB::table('campaigns')->where('id', $request->id)->update($data);
+ 
+             $notifications = array('messege' => 'Campaign Updated', 'alert-type' => 'success');
+             return redirect()->back()->with($notifications);
+         }
+     }
+
+
 }
