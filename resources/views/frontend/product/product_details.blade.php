@@ -521,8 +521,9 @@
                 success: function(data) {
                     toastr.success(data);
                     $('#add_to_cart')[0].reset();
-                    // cart();
-                    Cart.update();
+                    cart();  //eta kaj korena keno?
+                    // location.reload(); //cart() kaj korena tai use
+ 
                 }
             });
         });

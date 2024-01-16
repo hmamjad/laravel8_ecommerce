@@ -229,7 +229,7 @@
                                                     <li class="product_mark product_discount">new</li>
 
                                                 </ul>
-                                            </div>
+                                            </div><br>
                                         </div>
                                     @endforeach
                                 </div>
@@ -425,7 +425,7 @@
                                                             </div>
                                                         </a>
 
-                                                    </div>
+                                                    </div><br>
                                                 </div>
                                             @endforeach
 

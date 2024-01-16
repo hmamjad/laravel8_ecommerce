@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2024 at 01:17 PM
+-- Generation Time: Jan 16, 2024 at 12:48 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -42,9 +42,24 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `brand_name`, `brand_slug`, `brand_logo`, `front_page`, `created_at`, `updated_at`) VALUES
-(6, 'asfdsfd', 'asfdsfd', 'files/brand/asfdsfd.jpg', NULL, NULL, NULL),
-(7, 'Zara man', 'zara-man', 'files/brand/zara-man.jpg', NULL, NULL, NULL),
-(8, 'Plus Point', 'plus-point', 'files/brand/plus-point.jpg', NULL, NULL, NULL);
+(6, 'xyz', 'xyz', 'files/brand/asfdsfd.jpg', 0, NULL, NULL),
+(7, 'Zara man', 'zara-man', 'files/brand/zara-man.jpg', 1, NULL, NULL),
+(8, 'Plus Point', 'plus-point', 'files/brand/plus-point.jpg', 1, NULL, NULL),
+(9, 'Zara man2', 'zara-man2', 'files/brand/zara-man2.jpg', 1, NULL, NULL),
+(10, 'Zara man3', 'zara-man3', 'files/brand/zara-man3.jpg', 1, NULL, NULL),
+(11, 'Zara man4', 'zara-man4', 'files/brand/zara-man4.jpg', 1, NULL, NULL),
+(12, 'Zara man5', 'zara-man5', 'files/brand/zara-man5.jpg', 1, NULL, NULL),
+(13, 'Zara man6', 'zara-man6', 'files/brand/zara-man6.jpg', 1, NULL, NULL),
+(14, 'Zara man7', 'zara-man7', 'files/brand/zara-man7.jpg', 1, NULL, NULL),
+(15, 'Zara man8', 'zara-man8', 'files/brand/zara-man8.jpg', 1, NULL, NULL),
+(16, 'Zara man9', 'zara-man9', 'files/brand/zara-man9.jpg', 1, NULL, NULL),
+(17, 'Zara man10', 'zara-man10', 'files/brand/zara-man10.jpg', 1, NULL, NULL),
+(18, 'Zara man11', 'zara-man11', 'files/brand/zara-man11.jpg', 1, NULL, NULL),
+(19, 'Zara man12', 'zara-man12', 'files/brand/zara-man12.jpg', 1, NULL, NULL),
+(20, 'Allengers', 'allengers', 'files/brand/allengers.png', 1, NULL, NULL),
+(21, 'Omron', 'omron', 'files/brand/omron.png', 1, NULL, NULL),
+(22, '3M Littmann', '3m-littmann', 'files/brand/3m-littmann.png', 1, NULL, NULL),
+(23, 'Zara man15', 'zara-man15', 'files/brand/zara-man15.jpg', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -71,7 +86,8 @@ CREATE TABLE `campaigns` (
 --
 
 INSERT INTO `campaigns` (`id`, `title`, `start_date`, `end_date`, `image`, `status`, `discount`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(9, 'sadf', '2024-01-14', '2024-01-19', 'files/campaign/sadf.jpg', '1', '15', 'January', '2024', NULL, NULL);
+(9, 'september offer2', '2024-01-01', '2024-01-05', 'files/campaign/september-offer2.png', '0', '20', 'January', '2024', NULL, NULL),
+(12, 'hot offer', '2024-01-14', '2024-01-18', 'files/campaign/hot-offer.png', '0', '15', 'January', '2024', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,6 +99,8 @@ CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `home_page` int(11) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -91,12 +109,14 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
-(1, 'Mens Feshion', 'mens-feshion', NULL, NULL),
-(2, 'Women Feshion', 'women-feshion', NULL, NULL),
-(3, 'Electronics', 'electronics', NULL, NULL),
-(4, 'Furniture', 'furniture', NULL, NULL),
-(5, 'Vehicle', 'vehicle', NULL, NULL);
+INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `icon`, `home_page`, `created_at`, `updated_at`) VALUES
+(1, 'Mens Feshion', 'mens-feshion', 'files/category/mens-feshion.png', 1, NULL, NULL),
+(2, 'Women Feshion', 'women-feshion', 'files/category/women-feshion.png', 1, NULL, NULL),
+(3, 'Electronics', 'electronics', 'files/category/electronics.png', 0, NULL, NULL),
+(4, 'Furnitures', 'furnitures', 'files/category/furnitures.png', 0, NULL, '2024-01-14 19:30:16'),
+(5, 'Vehicle', 'vehicle', 'files/category/vehicle.jpeg', 0, NULL, NULL),
+(6, 'Sports', 'sports', 'files/category/sports.png', 0, NULL, NULL),
+(7, 'Medical Equipment & Components', 'medical-equipment-components', 'files/category/medical-equipment-components.jpg', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -319,15 +339,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `color`, `size`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `product_views`, `trendy`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(14, 1, 1, NULL, 8, 1, 'Shoe', 'shoe', 'A-30', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '1500', '1600', '1500', '80', 1, '<p>This is good product</p>', 'shoe.jpg', '[\"1787960896011946.jpg\",\"1787960896101233.jpg\"]', 1, 1, 1, 1, 6, 1, NULL, NULL, 1, '13-01-2024', 'January', '2024', NULL, '2024-01-14 03:19:36'),
-(15, 1, 1, 1, 7, 1, 'Shoe', 'shoe', 'A-01', 'psc', 'shoe,casual shoe', 'red,yellow,white', '40,50,45', 'BIt9o4zCWCQ', '1200', '1500', '100', '80', 1, '<p>Good product</p>', 'shoe.jpg', '[\"1788044902303327.jpg\",\"1788044902345985.jpg\"]', 1, 1, 1, 1, 3, 1, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, '2024-01-14 03:19:36'),
-(16, 1, 1, 1, 8, 1, 'Shoe', 'shoe', 'A-02', 'xyz', 'xyz', 'red,white', '40,50,60', 'BIt9o4zCWCQ', '1500', '1600', '100', '80', 1, '<p>xyz</p>', 'shoe.jpg', '[\"1788045073602211.jpg\",\"1788045073689992.jpg\"]', 1, 1, 1, 1, 3, 1, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, '2024-01-14 03:19:36'),
-(17, 2, 2, 2, 7, 1, 'Shoe', 'shoe', 'A-2', 'xyz', 'sdf', 'red,black,pink', '36,38,40', 'BIt9o4zCWCQ', '1200', '1600', '100', '80', 1, '<p>safdsaf</p>', 'shoe.jpg', '[\"1788045537358813.jpg\",\"1788045537440847.jpg\"]', 1, 1, 1, 1, 1, 1, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, '2024-01-14 03:19:36'),
-(18, 2, 2, 2, 7, 1, 'wshoe', 'wshoe', 'A-20', 'xyz', 'dsafd', 'red,white,black', '33,40,44', 'BIt9o4zCWCQ', '1200', '1500', '100', '80', 1, '<p>sdfdsf</p>', 'wshoe.jpg', '[\"1788046165740710.jpg\",\"1788046165802142.jpg\"]', 1, 1, 1, 1, 0, 1, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, NULL),
-(19, 2, 2, 2, 6, 1, 'wshoe', 'wshoe', 'A-111', 'xyz', 'dsafd', 'red,white,black', '33,40,44', 'BIt9o4zCWCQ', '1200', '1500', '100', '80', 1, '<p>sdfdsf</p>', 'wshoe.jpg', '[\"1788046293738321.jpg\",\"1788046293886284.jpg\"]', 1, 1, 1, 1, 0, NULL, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, NULL),
-(20, 1, 3, NULL, 7, 1, 'men_Shirt1', 'men-shirt1', 'shirt-1', 'xyz', 'fdasfd', 'red,white,black', '30,40,50', 'BIt9o4zCWCQ', '1200', '1500', '100', '80', 1, '<p>dsfdas</p>', 'men-shirt1.jpg', '[\"1788046962322673.jpg\",\"1788046962426765.jpg\"]', 1, 1, 1, 1, 1, 1, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, '2024-01-14 02:01:10'),
-(21, 2, 4, NULL, 7, 1, 'shari1', 'shari1', 'shari_1', 'xyz', 'fsdafd', 'red,black,white', '30,40,50', 'BIt9o4zCWCQ', '1200', '1500', '100', NULL, 1, '<p>kajdflka</p>', 'shari1.jpg', '[\"1788047046402861.jpg\",\"1788047046463248.jpg\"]', 1, 1, 1, 1, 1, 1, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, '2024-01-14 01:20:15'),
-(22, 2, 4, NULL, 7, 1, 'shari2', 'shari2', 'shari2', 'xyz', 'dsafd', 'red,black,yellow', '30,40,50', 'BIt9o4zCWCQ', '1200', '1500', '100', '80', 1, '<p>fdsfdsa</p>', 'shari2.jpg', '[\"1788047302805276.jpg\",\"1788047302864586.jpg\"]', 1, 1, 1, 1, 4, 1, NULL, NULL, 1, '14-01-2024', 'January', '2024', NULL, '2024-01-14 03:11:27');
+(25, 7, 5, NULL, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\"]', 1, NULL, 1, 1, 11, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-15 03:36:39'),
+(26, 7, 6, NULL, 21, 1, 'Omron MC-246 (MC246) 60 Second Digital Rigid Thermometer', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer', 'MC-246', 'xyz', 'MC-246', 'white,red,green', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer.jpg', '[\"1788146579104160.jpg\",\"1788146579163854.jpg\"]', 1, NULL, 1, 1, 77, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-16 03:22:54'),
+(27, 7, 7, NULL, 22, 1, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'other-colors-available-30-black-27-inch', '6186C', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'other-colors-available-30-black-27-inch.jpg', '[\"1788148599298040.jpg\",\"1788148599476646.jpg\"]', 1, 1, 1, 1, 53, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-16 05:47:41');
 
 -- --------------------------------------------------------
 
@@ -353,10 +367,7 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review`, `review_date`, `review_month`, `review_year`, `rating`, `created_at`, `updated_at`) VALUES
-(8, 2, 14, 'best shoe', '13-01-2024', 'January', 2024, 5, NULL, NULL),
-(9, 3, 14, 'Nice', '13-01-2024', 'January', 2024, 4, NULL, NULL),
-(10, 4, 14, 'Good', '13-01-2024', 'January', 2024, 4, NULL, NULL),
-(11, 6, 14, 'This is best product', '13-01-2024', 'January', 2024, 3, NULL, NULL);
+(12, 2, 26, 'Good product', '16-01-2024', 'January', 2024, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -416,7 +427,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `currency`, `phone_one`, `phone_two`, `main_email`, `support_email`, `logo`, `favicon`, `address`, `facebook`, `twitter`, `instagram`, `linkedin`, `youtube`, `created_at`, `updated_at`) VALUES
-(1, '$', '01776102769', '01776102769', 'hmamjad999@gmail.com', 'hmamjad999@gmail.com', 'files/setting/659d0eee551b6.png', 'files/setting/659d0eeea5ff3.jpg', 'Dahaka, Rampura, Banasree', 'www.facebook.com', 'www.facebook.com', 'www.facebook.com', 'www.facebook.com', 'www.facebook.com', NULL, NULL);
+(1, '৳', '01776102769', '01776102769', 'hmamjad999@gmail.com', 'hmamjad999@gmail.com', 'files/setting/659d0eee551b6.png', 'files/setting/659d0eeea5ff3.jpg', 'Dahaka, Rampura, Banasree', 'www.facebook.com', 'www.facebook.com', 'www.facebook.com', 'www.facebook.com', 'www.facebook.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -465,7 +476,10 @@ INSERT INTO `subcategories` (`id`, `category_id`, `subcategory_name`, `subcatego
 (1, 1, 'Mens Shoe', 'mens-shoe', NULL, NULL),
 (2, 2, 'Women shoe', 'women-shoe', NULL, NULL),
 (3, 1, 'Men Shirt', 'men-shirt', NULL, NULL),
-(4, 1, 'Women Shari', 'women-shari', NULL, NULL);
+(4, 1, 'Women Shari', 'women-shari', NULL, NULL),
+(5, 7, 'X-ray', 'x-ray', NULL, NULL),
+(6, 7, 'Thermometer', 'thermometer', NULL, NULL),
+(7, 7, 'Stethoscope', 'stethoscope', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -540,10 +554,8 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(1, 6, 14, NULL, NULL),
-(2, 1, 17, NULL, NULL),
-(3, 1, 22, NULL, NULL),
-(4, 1, 21, NULL, NULL);
+(7, 2, 27, NULL, NULL),
+(8, 2, 26, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -690,19 +702,19 @@ ALTER TABLE `wishlists`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `childcategories`
@@ -750,13 +762,13 @@ ALTER TABLE `pickup_point`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `seos`
@@ -780,7 +792,7 @@ ALTER TABLE `smtp`
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -798,7 +810,7 @@ ALTER TABLE `warehouses`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
