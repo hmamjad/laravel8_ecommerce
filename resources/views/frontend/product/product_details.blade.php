@@ -149,7 +149,7 @@
 
 
                         <div class="order_info d-flex flex-row">
-                            <form action="#" method="post" id="add_to_cart">
+                            <form action="{{route('add.to.cart.quickview')}}" method="post" id="add_to_cart">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                 @if ($product->discount_price == null)
@@ -508,7 +508,7 @@
    
     
     <script type="text/javascript">
-        //store coupon ajax call
+        //store addtocart ajax call
         $('#add_to_cart').submit(function(e) {
             e.preventDefault();
             var url = $(this).attr('action');
@@ -521,7 +521,8 @@
                 success: function(data) {
                     toastr.success(data);
                     $('#add_to_cart')[0].reset();
-                    cart();
+                    // cart();
+                    Cart.update();
                 }
             });
         });

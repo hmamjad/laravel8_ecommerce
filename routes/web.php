@@ -42,6 +42,9 @@ Route::post('/store/review','ReviewController@store')->name('store.review');
 Route::get('/add/wishlist/{id}','ReviewController@AddWishlist')->name('add.wishlist');
 // product-quick-view
 Route::get('/product-quick-view/{id}','IndexController@ProductQuickView');
+// Add to cart
+Route::post('/addtocart','CartController@addTocartQV')->name('add.to.cart.quickview');
+
 
 });
 
