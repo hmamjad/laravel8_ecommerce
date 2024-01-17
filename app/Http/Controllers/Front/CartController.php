@@ -18,14 +18,14 @@ class CartController extends Controller
         // $product = DB::table('products')->where('id',$request->id)->first();
         // $product = Product::where('id',$request->id)->first();
         $product = Product::find($request->id);
-
+      
         Cart::add([
             'id'=>$product->id,                 //$request->id
             'name'=>$product->name,
             'qty'=>$request->qty,
             'price'=>$request->price,
             'weight'=>'1',
-            'option'=>[
+            'options'=>[
                 'size'=>$request->size,
                 'color'=>$request->color,
                 'thumbnail'=>$product->thumbnail,
@@ -35,4 +35,19 @@ class CartController extends Controller
 
         return response()->json('product added on cart!');
     }
+
+
+
+    // My Cart
+    public function mycart(){
+        $content = Cart::content();
+        // dd($content);
+        return view('frontend.cart.cart',compact('content'));
+    }
+
+
+
+
+
+
 }

@@ -161,8 +161,8 @@
                 toastr.success(data);
                 $('#add_cart_form')[0].reset();
                 $('.loading').addClass('d-none');
-                cart(); //eta kaj korena keno?
-                // location.reload(); //cart() kaj korena tai use
+                // cart(); //eta kaj korena keno?
+                location.reload(); //cart() kaj korena tai use
                 
             }
         });

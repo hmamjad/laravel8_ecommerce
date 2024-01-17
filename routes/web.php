@@ -13,13 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
-
 Auth::routes();
 
-Route::get('/login',function(){
+Route::get('/login', function () {
     return redirect()->to('/');
 })->name('login');
 
@@ -33,19 +29,20 @@ Route::get('/customer/logout', [App\Http\Controllers\HomeController::class, 'log
 // Frontend All Routes
 Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
 
-Route::get('/','IndexController@index');
-Route::get('/product-details/{slug}','IndexController@ProductDetails')->name('product.details');
+    Route::get('/', 'IndexController@index');
+    Route::get('/product-details/{slug}', 'IndexController@ProductDetails')->name('product.details');
 
-// Review
-Route::post('/store/review','ReviewController@store')->name('store.review');
-// Wishlist
-Route::get('/add/wishlist/{id}','ReviewController@AddWishlist')->name('add.wishlist');
-// product-quick-view
-Route::get('/product-quick-view/{id}','IndexController@ProductQuickView');
-// Add to cart
-Route::post('/addtocart','CartController@addTocartQV')->name('add.to.cart.quickview');
-
-
+    // Review
+    Route::post('/store/review', 'ReviewController@store')->name('store.review');
+    // Wishlist
+    Route::get('/add/wishlist/{id}', 'ReviewController@AddWishlist')->name('add.wishlist');
+    // product-quick-view
+    Route::get('/product-quick-view/{id}', 'IndexController@ProductQuickView');
+    // Add to cart
+    Route::get('/my-cart', 'CartController@MyCart')->name('cart');
+    Route::post('/addtocart', 'CartController@addTocartQV')->name('add.to.cart.quickview');
 });
 
-
+Route::get('/cart/destroy',function(){
+    Cart::destroy();
+});
