@@ -41,8 +41,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     // Add to cart
     Route::get('/my-cart', 'CartController@MyCart')->name('cart');
     Route::post('/addtocart', 'CartController@addTocartQV')->name('add.to.cart.quickview');
+    Route::get('/cartproduct/remove/{rowId}', 'CartController@RemoveProduct');
+    Route::get('cartproduct/updateqty/{rowId}/{qty}', 'CartController@UpdateQty');
+    Route::get('cartproduct/updatecolor/{rowId}/{color}', 'CartController@UpdateColor');
+    Route::get('cartproduct/updatesize/{rowId}/{size}', 'CartController@UpdateSize');
+    Route::get('/cart/empty', 'CartController@EmptyCart')->name('cart.empty');
 });
 
-Route::get('/cart/destroy',function(){
-    Cart::destroy();
-});
+
