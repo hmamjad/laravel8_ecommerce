@@ -130,7 +130,7 @@
                     <div
                         class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
                         <div class="newsletter_title_container">
-                            <div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+                            <div class="newsletter_icon"><img src="{{ asset('frontend') }}/images/send.png" alt=""></div>
                             <div class="newsletter_title">Sign up for Newsletter</div>
                             <div class="newsletter_text">
                                 <p>...and receive %20 coupon for first shopping.</p>
@@ -184,7 +184,7 @@
             });
         });
 
-<<<<<<< HEAD
+
         //color update
         $('body').on('change', '.color', function() {
             let color = $(this).val();
@@ -199,7 +199,7 @@
                 }
             });
         });
-=======
+
 		 //qty update with ajax
 		 $('body').on('click','.qty', function(){  //blur
 		    let qty=$(this).val();
@@ -214,7 +214,7 @@
 		      }
 		    });
 		  });
->>>>>>> 3c5be1a00a51ff37667873cfd27d15a124ce70f1
+
 
         //size update
         $('body').on('change', '.size', function() {

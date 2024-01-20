@@ -99,52 +99,57 @@ class CartController extends Controller
 
 
     // Wishlist Add
-    public function AddWishlist($id){
-        $check=DB::table('wishlists')->where('product_id',$id)->where('user_id',Auth::id())->first();
-
-        if ($check) {
-            $notification=array('messege' => 'Already have it on your wishlist !', 'alert-type' => 'error');
-            return redirect()->back()->with($notification); 
-         }else{
-
-            $data = array();
-            $data['product_id'] = $id;
-            $data['user_id'] = Auth::id();
-            $data['date'] = date('d, F Y');
-            DB::table('wishlists')->insert($data);
-
-            $notifications = array('messege' => 'Product added in wishlist', 'alert-type' => 'success');
-        return redirect()->back()->with($notifications);
-            
-
-         }
-    }
-
-    // wishlist show
-    public function wishlist(){
+    public function AddWishlist($id)
+    {
 
         if(Auth::check()){
-            $wishlist = DB::table('wishlists')->leftJoin('products','wishlists.product_id','products.id')->select('products.name','products.thumbnail','products.slug','wishlists.*')->where('wishlists.user_id',Auth::id())->get();
-            return view('frontend.cart.wishlist',compact('wishlist'));
+            $check=DB::table('wishlists')->where('product_id',$id)->where('user_id',Auth::id())->first();
+               if ($check) {
+                     $notification=array('messege' => 'Already have it on your wishlist !', 'alert-type' => 'error');
+                     return redirect()->back()->with($notification); 
+               }else{
+                    $data=array();
+                    $data['product_id']=$id;
+                    $data['user_id']=Auth::id();
+                    $data['date']=date('d , F Y');
+                    DB::table('wishlists')->insert($data);
+                    $notification=array('messege' => 'Product added on wishlist!', 'alert-type' => 'success');
+                    return redirect()->back()->with($notification); 
+               }
+        }
+
+        $notification=array('messege' => 'Login Your Account!', 'alert-type' => 'error');
+        return redirect()->back()->with($notification);  
+    }
+
+
+
+
+    // wishlist show
+    public function wishlist()
+    {
+
+        if (Auth::check()) {
+            $wishlist = DB::table('wishlists')->leftJoin('products', 'wishlists.product_id', 'products.id')->select('products.name', 'products.thumbnail', 'products.slug', 'wishlists.*')->where('wishlists.user_id', Auth::id())->get();
+            return view('frontend.cart.wishlist', compact('wishlist'));
         }
 
         $notifications = array('messege' => 'At first Login your Acount', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
-
     }
 
     // Clearwishlist
-    public function Clearwishlist(){
-        DB::table('wishlists')->where('user_id',Auth::id())->delete();
+    public function Clearwishlist()
+    {
+        DB::table('wishlists')->where('user_id', Auth::id())->delete();
         $notifications = array('messege' => 'Wishlist Cleared', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
-
     }
     // WishlistProductdelete
-    public function WishlistProductdelete($id){
-        DB::table('wishlists')->where('id',$id)->delete();
+    public function WishlistProductdelete($id)
+    {
+        DB::table('wishlists')->where('id', $id)->delete();
         $notifications = array('messege' => 'Successfully Deleted', 'alert-type' => 'success');
         return redirect()->back()->with($notifications);
-
     }
 }
