@@ -20,9 +20,13 @@
                                         $product = DB::table('products')
                                             ->where('id', $row->id)
                                             ->first();
+
                                         $colors = explode(',', $product->color);
+
                                         $sizes = explode(',', $product->size);
+
                                     @endphp
+
                                     <li class="cart_item clearfix">
                                         <div class="cart_item_image"><img
                                                 src="{{ asset('files/product/' . $row->options->thumbnail) }}"
@@ -37,8 +41,8 @@
                                                 <div class="cart_item_color cart_info_col">
                                                     <div class="cart_item_title">Size</div>
                                                     <div class="cart_item_text">
-                                                        <select class="custom-select form-control-sm size" name="size"  data-id="{{$row->rowId}}"
-                                                            style="min-width: 100px;">
+                                                        <select class="custom-select form-control-sm size" name="size"
+                                                            data-id="{{ $row->rowId }}" style="min-width: 100px;">
                                                             @foreach ($sizes as $size)
                                                                 <option value="{{ $size }}"
                                                                     @if ($size == $row->options->size) selected="" @endif>
@@ -53,8 +57,8 @@
                                                 <div class="cart_item_color cart_info_col">
                                                     <div class="cart_item_title">Color</div>
                                                     <div class="cart_item_text">
-                                                        <select class="custom-select form-control-sm color" name="color" data-id="{{$row->rowId}}"
-                                                            style="min-width: 100px;">
+                                                        <select class="custom-select form-control-sm color" name="color"
+                                                            data-id="{{ $row->rowId }}" style="min-width: 100px;">
                                                             @foreach ($colors as $color)
                                                                 <option value="{{ $color }}"
                                                                     @if ($color == $row->options->color) selected="" @endif>
@@ -68,22 +72,27 @@
                                             <div class="cart_item_quantity cart_info_col">
                                                 <div class="cart_item_title">Quantity</div>
                                                 <div class="cart_item_text">
-                                                    <input class="form-control-sm qty" style="max-width: 100px;" type="number"
-                                                        name="qty" value="{{$row->qty}}" min="1"  data-id="{{$row->rowId}}" required>
-                                                       
+                                                    <input class="form-control-sm qty" style="max-width: 100px;"
+                                                        type="number" name="qty" value="{{ $row->qty }}"
+                                                        min="1" data-id="{{ $row->rowId }}" required>
+
                                                 </div>
                                             </div>
                                             <div class="cart_item_price cart_info_col">
                                                 <div class="cart_item_title">Price</div>
-                                                <div class="cart_item_text">{{ $setting->currency }} {{ $row->price }} x {{$row->qty }}</div>
+                                                <div class="cart_item_text">{{ $setting->currency }} {{ $row->price }} x
+                                                    {{ $row->qty }}</div>
                                             </div>
                                             <div class="cart_item_total cart_info_col">
                                                 <div class="cart_item_title">Total</div>
-                                                <div class="cart_item_text">{{ $setting->currency }} {{ $row->qty*$row->price }}</div>
+                                                <div class="cart_item_text">{{ $setting->currency }}
+                                                    {{ $row->qty * $row->price }}</div>
                                             </div>
                                             <div class="cart_item_total cart_info_col">
                                                 <div class="cart_item_title">Action</div>
-                                                <div class="cart_item_text"> <a href="#" data-id="{{$row->rowId}}" id="removeProduct" class="text-danger">X</a>
+                                                <div class="cart_item_text"> <a href="#"
+                                                        data-id="{{ $row->rowId }}" id="removeProduct"
+                                                        class="text-danger">X</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,12 +107,12 @@
                         <div class="order_total">
                             <div class="order_total_content text-md-right">
                                 <div class="order_total_title">Order Total:</div>
-                                <div class="order_total_amount">{{ $setting->currency }} {{Cart::total()}}</div>
+                                <div class="order_total_amount">{{ $setting->currency }} {{ Cart::total() }}</div>
                             </div>
                         </div>
 
                         <div class="cart_buttons">
-                            <a href="{{route('cart.empty')}}" class="button cart_button_clear btn-danger">Empty Cart</a>
+                            <a href="{{ route('cart.empty') }}" class="button cart_button_clear btn-danger">Empty Cart</a>
                             <button type="button" class="button cart_button_checkout">Checkout</button>
                         </div>
                     </div>
@@ -143,68 +152,66 @@
 
 
 
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript">
+    <script type="text/javascript">
+        $('body').on('click', '#removeProduct', function() {
+            let id = $(this).data('id');
 
-		 $('body').on('click','#removeProduct', function(){
-		    let id=$(this).data('id');
+            $.ajax({
+                url: '{{ url('cartproduct/remove/') }}/' + id,
+                type: 'get',
+                async: false,
+                success: function(data) {
+                    toastr.success(data);
+                    location.reload();
+                }
+            });
+        });
 
-		    $.ajax({
-		      url:'{{ url('cartproduct/remove/') }}/'+id,
-		      type:'get',
-		      async:false,
-		      success:function(data){
-		        toastr.success(data);
-		        location.reload();
-		      }
-		    });
-		  });
+        //qty update with ajax
+        $('body').on('blur', '.qty', function() {
+            let qty = $(this).val();
+            let rowId = $(this).data('id');
+            $.ajax({
+                url: '{{ url('cartproduct/updateqty/') }}/' + rowId + '/' + qty,
+                type: 'get',
+                async: false,
+                success: function(data) {
+                    toastr.success(data);
+                    location.reload();
+                }
+            });
+        });
 
-		 //qty update with ajax
-		 $('body').on('blur','.qty', function(){
-		    let qty=$(this).val();
-		    let rowId=$(this).data('id');
-		    $.ajax({
-		      url:'{{ url('cartproduct/updateqty/') }}/'+rowId+'/'+qty,
-		      type:'get',
-		      async:false,
-		      success:function(data){
-		        toastr.success(data);
-		        location.reload();
-		      }
-		    });
-		  });
+        //color update
+        $('body').on('change', '.color', function() {
+            let color = $(this).val();
+            let rowId = $(this).data('id');
+            $.ajax({
+                url: '{{ url('cartproduct/updatecolor/') }}/' + rowId + '/' + color,
+                type: 'get',
+                async: false,
+                success: function(data) {
+                    toastr.success(data);
+                    location.reload();
+                }
+            });
+        });
 
-		 //color update
-		 $('body').on('change','.color', function(){
-		    let color=$(this).val();
-		    let rowId=$(this).data('id');
-		    $.ajax({
-		      url:'{{ url('cartproduct/updatecolor/') }}/'+rowId+'/'+color,
-		      type:'get',
-		      async:false,
-		      success:function(data){
-		        toastr.success(data);
-		        location.reload();
-		      }
-		    });
-		  });
-
-		 //size update
-		 $('body').on('change','.size', function(){
-		    let size=$(this).val();
-		    let rowId=$(this).data('id');
-		    $.ajax({
-		      url:'{{ url('cartproduct/updatesize/') }}/'+rowId+'/'+size,
-		      type:'get',
-		      async:false,
-		      success:function(data){
-		        toastr.success(data);
-		        location.reload();
-		      }
-		    });
-		  });
-
-	</script>
+        //size update
+        $('body').on('change', '.size', function() {
+            let size = $(this).val();
+            let rowId = $(this).data('id');
+            $.ajax({
+                url: '{{ url('cartproduct/updatesize/') }}/' + rowId + '/' + size,
+                type: 'get',
+                async: false,
+                success: function(data) {
+                    toastr.success(data);
+                    location.reload();
+                }
+            });
+        });
+    </script>
 @endsection
