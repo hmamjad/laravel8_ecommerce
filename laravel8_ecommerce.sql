@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2024 at 12:48 PM
+-- Generation Time: Jan 20, 2024 at 01:32 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -140,7 +140,8 @@ CREATE TABLE `childcategories` (
 
 INSERT INTO `childcategories` (`id`, `category_id`, `subcategory_id`, `childcategory_name`, `childcategory_slug`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 'Casual shoe', 'casual-shoe', NULL, NULL),
-(2, 2, 2, 'Red shoe', 'red-shoe', NULL, NULL);
+(2, 2, 2, 'Red shoe', 'red-shoe', NULL, NULL),
+(3, 7, 5, 'plain x-ray', 'plain-x-ray', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -339,9 +340,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `color`, `size`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `product_views`, `trendy`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(25, 7, 5, NULL, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\"]', 1, NULL, 1, 1, 11, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-15 03:36:39'),
-(26, 7, 6, NULL, 21, 1, 'Omron MC-246 (MC246) 60 Second Digital Rigid Thermometer', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer', 'MC-246', 'xyz', 'MC-246', 'white,red,green', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer.jpg', '[\"1788146579104160.jpg\",\"1788146579163854.jpg\"]', 1, NULL, 1, 1, 77, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-16 03:22:54'),
-(27, 7, 7, NULL, 22, 1, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'other-colors-available-30-black-27-inch', '6186C', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'other-colors-available-30-black-27-inch.jpg', '[\"1788148599298040.jpg\",\"1788148599476646.jpg\"]', 1, 1, 1, 1, 53, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-16 05:47:41');
+(25, 7, 5, NULL, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', NULL, '80', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\"]', 1, 1, 1, 1, 57, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-20 04:56:43'),
+(26, 7, 6, NULL, 21, 1, 'Omron MC-246 (MC246) 60 Second Digital Rigid Thermometer', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer', 'MC-246', 'xyz', 'MC-246', 'white,red,green', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer.jpg', '[\"1788146579104160.jpg\",\"1788146579163854.jpg\"]', 1, 1, 1, 1, 81, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-20 04:48:08'),
+(27, 7, 7, NULL, 22, 1, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'other-colors-available-30-black-27-inch', '6186C', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'other-colors-available-30-black-27-inch.jpg', '[\"1788148599298040.jpg\",\"1788148599476646.jpg\"]', 1, 1, 1, 1, 93, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-20 04:48:04'),
+(28, 7, 5, 3, 20, 1, 'x-ray', 'x-ray', 'x-123', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '14000', '12000', '47', 1, '<p>good product</p>', 'x-ray.jpg', '[\"1788610508116840.jpg\",\"1788610508153374.jpg\",\"1788610508207268.jpg\"]', 1, 1, 1, 1, 0, 1, NULL, NULL, 1, '20-01-2024', 'January', '2024', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -367,7 +369,8 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review`, `review_date`, `review_month`, `review_year`, `rating`, `created_at`, `updated_at`) VALUES
-(12, 2, 26, 'Good product', '16-01-2024', 'January', 2024, 5, NULL, NULL);
+(12, 2, 26, 'Good product', '16-01-2024', 'January', 2024, 5, NULL, NULL),
+(13, 2, 25, 'This is good produt.I used it.You can buy it.', '17-01-2024', 'January', 2024, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -545,6 +548,7 @@ CREATE TABLE `wishlists` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `product_id` bigint(20) UNSIGNED NOT NULL,
+  `date` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -553,9 +557,11 @@ CREATE TABLE `wishlists` (
 -- Dumping data for table `wishlists`
 --
 
-INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(7, 2, 27, NULL, NULL),
-(8, 2, 26, NULL, NULL);
+INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `date`, `created_at`, `updated_at`) VALUES
+(7, 2, 27, NULL, NULL, NULL),
+(18, 3, 27, '20, January 2024', NULL, NULL),
+(19, 3, 25, '20, January 2024', NULL, NULL),
+(20, 3, 26, '20, January 2024', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -720,7 +726,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `childcategories`
 --
 ALTER TABLE `childcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -762,13 +768,13 @@ ALTER TABLE `pickup_point`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `seos`
@@ -810,7 +816,7 @@ ALTER TABLE `warehouses`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables

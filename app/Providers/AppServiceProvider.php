@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // pagination problem
+        Paginator::useBootstrap();
+
         // learnhunter
         $settings = DB::table('settings')->first();
         view()->share('setting',$settings);

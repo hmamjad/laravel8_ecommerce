@@ -184,6 +184,7 @@
             });
         });
 
+<<<<<<< HEAD
         //color update
         $('body').on('change', '.color', function() {
             let color = $(this).val();
@@ -198,6 +199,22 @@
                 }
             });
         });
+=======
+		 //qty update with ajax
+		 $('body').on('click','.qty', function(){  //blur
+		    let qty=$(this).val();
+		    let rowId=$(this).data('id');
+		    $.ajax({
+		      url:'{{ url('cartproduct/updateqty/') }}/'+rowId+'/'+qty,
+		      type:'get',
+		      async:false,
+		      success:function(data){
+		        toastr.success(data);
+		        location.reload();
+		      }
+		    });
+		  });
+>>>>>>> 3c5be1a00a51ff37667873cfd27d15a124ce70f1
 
         //size update
         $('body').on('change', '.size', function() {

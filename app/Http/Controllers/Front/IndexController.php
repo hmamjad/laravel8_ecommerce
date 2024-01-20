@@ -56,4 +56,36 @@ class IndexController extends Controller
          return view('frontend.product.quick_view',compact('product'));
         
      }
+
+    //  category wise product
+    public function categoryWiseProduct($id){
+        $category = DB::table('categories')->where('id',$id)->first();
+        $subcategory = DB::table('subcategories')->where('category_id',$id)->get();
+        $brand = DB::table('brands')->get();
+        $products = DB::table('products')->where('category_id',$id)->paginate(60);
+        $random_product=Product::where('status',1)->inRandomOrder()->limit(16)->get();
+
+        return view('frontend.product.category_products',compact('category','subcategory','brand','products','random_product'));
+    }
+
+    //  Sub-category wise product
+    public function SubcategoryWiseProduct($id){
+        $subcategory = DB::table('subcategories')->where('id',$id)->first();
+        $childcategory = DB::table('childcategories')->where('subcategory_id',$id)->get();
+        $brand = DB::table('brands')->get();
+        $products = DB::table('products')->where('subcategory_id',$id)->paginate(60);
+        $random_product=Product::where('status',1)->inRandomOrder()->limit(16)->get();
+
+        return view('frontend.product.subcategory_products',compact('subcategory','childcategory','brand','products','random_product'));
+    }
+    //  Child-category wise product
+    public function ChildcategoryWiseProduct($id){
+        $childcategory = DB::table('childcategories')->where('id',$id)->first();
+        $category = DB::table('categories')->get();
+        $brand = DB::table('brands')->get();
+        $products = DB::table('products')->where('childcategory_id',$id)->paginate(60);
+        $random_product=Product::where('status',1)->inRandomOrder()->limit(16)->get();
+
+        return view('frontend.product.childcategory_products',compact('childcategory','category','brand','products','random_product'));
+    }
 }
