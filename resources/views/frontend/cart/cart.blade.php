@@ -162,7 +162,7 @@
 		  });
 
 		 //qty update with ajax
-		 $('body').on('blur','.qty', function(){
+		 $('body').on('click','.qty', function(){  //blur
 		    let qty=$(this).val();
 		    let rowId=$(this).data('id');
 		    $.ajax({

@@ -35,7 +35,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     // Review
     Route::post('/store/review', 'ReviewController@store')->name('store.review');
     // Wishlist
-    Route::get('/add/wishlist/{id}', 'ReviewController@AddWishlist')->name('add.wishlist');
+    Route::get('/add/wishlist/{id}', 'CartController@AddWishlist')->name('add.wishlist');
+    Route::get('/wishlist', 'CartController@wishlist')->name('wishlist');
+    Route::get('/clear/wishlist', 'CartController@Clearwishlist')->name('clear.wishlist');
+    Route::get('/wishlist/product/delete/{id}', 'CartController@WishlistProductdelete')->name('wishlistproduct.delete');
+
     // product-quick-view
     Route::get('/product-quick-view/{id}', 'IndexController@ProductQuickView');
     // Add to cart
@@ -46,6 +50,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     Route::get('cartproduct/updatecolor/{rowId}/{color}', 'CartController@UpdateColor');
     Route::get('cartproduct/updatesize/{rowId}/{size}', 'CartController@UpdateSize');
     Route::get('/cart/empty', 'CartController@EmptyCart')->name('cart.empty');
+
+
+        // Category wise products
+        Route::get('/categor/product/{id}', 'IndexController@categoryWiseProduct')->name('categorywise.product');
+        // Sub-Category wise products
+        Route::get('/subcategorywise/product/{id}', 'IndexController@SubcategoryWiseProduct')->name('subcategorywise.product');
+        // Sub-Category wise products
+        Route::get('/childcategorywise/product/{id}', 'IndexController@ChildcategoryWiseProduct')->name('childcategorywise.product');
+
+
 });
 
 

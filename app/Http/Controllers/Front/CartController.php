@@ -8,6 +8,7 @@ use Cart;
 use App\Models\Product;
 //  use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class CartController extends Controller
 {
@@ -94,5 +95,56 @@ class CartController extends Controller
         Cart::destroy();
         $notification = array('messege' => 'Cart Item Clear !', 'alert-type' => 'success');
         return redirect()->to('/')->with($notification);
+    }
+
+
+    // Wishlist Add
+    public function AddWishlist($id){
+        $check=DB::table('wishlists')->where('product_id',$id)->where('user_id',Auth::id())->first();
+
+        if ($check) {
+            $notification=array('messege' => 'Already have it on your wishlist !', 'alert-type' => 'error');
+            return redirect()->back()->with($notification); 
+         }else{
+
+            $data = array();
+            $data['product_id'] = $id;
+            $data['user_id'] = Auth::id();
+            $data['date'] = date('d, F Y');
+            DB::table('wishlists')->insert($data);
+
+            $notifications = array('messege' => 'Product added in wishlist', 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+            
+
+         }
+    }
+
+    // wishlist show
+    public function wishlist(){
+
+        if(Auth::check()){
+            $wishlist = DB::table('wishlists')->leftJoin('products','wishlists.product_id','products.id')->select('products.name','products.thumbnail','products.slug','wishlists.*')->where('wishlists.user_id',Auth::id())->get();
+            return view('frontend.cart.wishlist',compact('wishlist'));
+        }
+
+        $notifications = array('messege' => 'At first Login your Acount', 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+
+    }
+
+    // Clearwishlist
+    public function Clearwishlist(){
+        DB::table('wishlists')->where('user_id',Auth::id())->delete();
+        $notifications = array('messege' => 'Wishlist Cleared', 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+
+    }
+    // WishlistProductdelete
+    public function WishlistProductdelete($id){
+        DB::table('wishlists')->where('id',$id)->delete();
+        $notifications = array('messege' => 'Successfully Deleted', 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+
     }
 }

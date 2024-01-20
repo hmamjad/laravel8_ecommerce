@@ -23,7 +23,7 @@
                                 @endphp
 
                                 <li class="hassubs">
-                                    <a href="#"><img src="{{ asset($row->icon) }}" height="18" width="18">{{ $row->category_name }}<i class="fas fa-chevron-right"></i></a>
+                                    <a href="{{route('categorywise.product',$row->id)}}"><img src="{{ asset($row->icon) }}" height="18" width="18">{{ $row->category_name }}<i class="fas fa-chevron-right"></i></a>
                                     <ul>
                                         @foreach ($subcategory as $row)
                                             @php
@@ -32,12 +32,12 @@
                                                     ->get();
                                             @endphp
                                             <li class="hassubs">
-                                                <a href="#">{{ $row->subcategory_name }}<i
+                                                <a href="{{route('subcategorywise.product',$row->id)}}">{{ $row->subcategory_name }}<i
                                                         class="fas fa-chevron-right"></i></a>
                                                 <ul>
 
                                                     @foreach ($childcategory as $row)
-                                                    <li><a href="#">{{ $row->childcategory_name }}<i class="fas fa-chevron-right"></i></a>
+                                                    <li><a href="{{route('childcategorywise.product',$row->id)}}">{{ $row->childcategory_name }}<i class="fas fa-chevron-right"></i></a>
                                                     </li>
                                                     @endforeach
                                                     
