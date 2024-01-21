@@ -14,12 +14,7 @@ class IndexController extends Controller
 {
     //root page
     public function index(){
-        // $category = DB::table('categories')->get();  //$category = Category::all();
-        // $bannerproduct = Product::where('product_slider',1)->latest()->first();  //  $bannerproduct = DB::table('products')->where('product_slider',1)->latest()->first();
-        // $featured = Product::where('featured',1)->orderBy('id','DESC')->limit(8)->get();  //  $bannerproduct = DB::table('products')->where('product_slider',1)->latest()->first();
-        // return view('frontend.index',compact('category','bannerproduct','featured'));
-
-
+     
         $category=DB::table('categories')->orderBy('category_name','ASC')->get();
         $brand=DB::table('brands')->where('front_page',1)->limit(24)->get();
         $bannerproduct=Product::where('status',1)->where('product_slider',1)->latest()->first();
@@ -28,14 +23,14 @@ class IndexController extends Controller
         $popular_product=Product::where('status',1)->orderBy('product_views','DESC')->limit(16)->get();
         $trendy_product=Product::where('status',1)->where('trendy',1)->orderBy('id','DESC')->limit(8)->get();
         $random_product=Product::where('status',1)->inRandomOrder()->limit(16)->get();
-        // $review=DB::table('wbreviews')->where('status',1)->orderBy('id','DESC')->limit(12)->get();
+        $review=DB::table('wbreviews')->where('status',1)->orderBy('id','DESC')->limit(12)->get();
         //homepage category
         $home_category=DB::table('categories')->where('home_page',1)->orderBy('category_name','ASC')->get();
 
 
         // $campaign=DB::table('campaigns')->where('status',1)->orderBy('id','DESC')->first();
 
-        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','trendy_product','brand','random_product','todaydeal','home_category'));
+        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','trendy_product','brand','random_product','todaydeal','home_category','review'));
     }
 
     // singleProduct page calling Method
@@ -88,4 +83,24 @@ class IndexController extends Controller
 
         return view('frontend.product.childcategory_products',compact('childcategory','category','brand','products','random_product'));
     }
+    // Brand wise product
+    public function BrandWiseProduct($id){
+        $brand = DB::table('brands')->where('id',$id)->first();
+        $categories = DB::table('categories')->get();
+        $brands = DB::table('brands')->get();
+        $products = DB::table('products')->where('brand_id',$id)->paginate(60);
+        $random_product=Product::where('status',1)->inRandomOrder()->limit(16)->get();
+
+        return view('frontend.product.brandwise_products',compact('brand','categories','brands','products','random_product'));
+    }
+
+    // Page view
+    public function ViewPage($page_slug){
+        $page = DB::table('pages')->where('page_slug',$page_slug)->first();
+        return view('frontend.page',compact('page'));
+    }
+
+
+
+
 }

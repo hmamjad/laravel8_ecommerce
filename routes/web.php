@@ -32,8 +32,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     Route::get('/', 'IndexController@index');
     Route::get('/product-details/{slug}', 'IndexController@ProductDetails')->name('product.details');
 
-    // Review
+    // Review for porduct
     Route::post('/store/review', 'ReviewController@store')->name('store.review');
+    // Review for website
+    Route::get('/write/review', 'ReviewController@write')->name('write.review');
+    Route::post('/store/website/review', 'ReviewController@StoreWebsiteReview')->name('store.website.review');
     // Wishlist
     Route::get('/add/wishlist/{id}', 'CartController@AddWishlist')->name('add.wishlist');
     Route::get('/wishlist', 'CartController@wishlist')->name('wishlist');
@@ -52,14 +55,22 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     Route::get('/cart/empty', 'CartController@EmptyCart')->name('cart.empty');
 
 
-        // Category wise products
-        Route::get('/categor/product/{id}', 'IndexController@categoryWiseProduct')->name('categorywise.product');
-        // Sub-Category wise products
-        Route::get('/subcategorywise/product/{id}', 'IndexController@SubcategoryWiseProduct')->name('subcategorywise.product');
-        // Sub-Category wise products
-        Route::get('/childcategorywise/product/{id}', 'IndexController@ChildcategoryWiseProduct')->name('childcategorywise.product');
+    // Category wise products
+    Route::get('/categor/product/{id}', 'IndexController@categoryWiseProduct')->name('categorywise.product');
+    // Sub-Category wise products
+    Route::get('/subcategorywise/product/{id}', 'IndexController@SubcategoryWiseProduct')->name('subcategorywise.product');
+    // child-Category wise products
+    Route::get('/childcategorywise/product/{id}', 'IndexController@ChildcategoryWiseProduct')->name('childcategorywise.product');
+    // Brand wise products
+    Route::get('/brandwise/product/{id}', 'IndexController@BrandWiseProduct')->name('brandwise.product');
 
+
+
+    // setting profile 
+    Route::get('/customer/setting', 'ProfileController@setting')->name('customer.setting');
+    Route::post('/home/password/update', 'ProfileController@PasswordChange')->name('customer.password.change');
+
+    // page view
+    Route::get('/page/{page_slug}', 'IndexController@ViewPage')->name('view.page');
 
 });
-
-

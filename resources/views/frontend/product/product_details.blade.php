@@ -523,7 +523,7 @@
                     $('#add_to_cart')[0].reset();
                     // cart();  //eta kaj korena keno?
                     location.reload(); //cart() kaj korena tai use
- 
+                  
                 }
             });
         });

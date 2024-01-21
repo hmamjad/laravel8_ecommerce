@@ -67,7 +67,7 @@
                 @foreach ($brand as $row)
                     <div class="col-lg-1 col-md-6 char_col" style="border:1px solid grey; padding:5px;">
                         <div class="brands_item">
-                            <a href="#" title="{{ $row->brand_name }}"> {{-- {{ route('brandwise.product', $row->id) }} --}}
+                            <a href="{{ route('brandwise.product', $row->id) }}" title="{{ $row->brand_name }}">
                                 <img src="{{ asset($row->brand_logo) }}" alt="{{ $row->brand_name }}" height="100%"
                                     width="100%">
                             </a>
@@ -339,7 +339,7 @@
                                             <img src="{{ asset($row->icon) }}" alt="{{ $row->category_name }}">
                                         </div>
                                         <div class="popular_category_text">
-                                            <a href=""> {{ $row->category_name }} </a> {{-- {{ route('categorywise.product',$row->id) }} --}}
+                                            <a href="{{ route('categorywise.product',$row->id) }}"> {{ $row->category_name }} </a> 
                                         </div>
                                     </div>
                                 </div>
@@ -601,7 +601,7 @@
 
                         <!-- Reviews Slider -->
                         <div class="owl-carousel owl-theme reviews_slider">
-                            {{-- @foreach ($review as $row)
+                             @foreach ($review as $row)
                                 <!-- Reviews Slider Item -->
                                 <div class="owl-item">
                                     <div class="review d-flex flex-row align-items-start justify-content-start">
@@ -654,7 +654,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach --}}
+                            @endforeach 
                         </div>
                         <div class="reviews_dots"></div>
                     </div>
@@ -728,7 +728,7 @@
                             @foreach ($brand as $row)
                                 <div class="owl-item">
                                     <div class="brands_item d-flex flex-column justify-content-center">
-                                        <a href="#" {{-- {{ route('brandwise.product', $row->id) }} --}} title="{{ $row->brand_name }}"> <img
+                                        <a href="{{ route('brandwise.product', $row->id) }}"  title="{{ $row->brand_name }}"> <img
                                                 src="{{ asset($row->brand_logo) }}" alt="{{ $row->brand_name }}"
                                                 height="50" width="40"> </a>
                                     </div>

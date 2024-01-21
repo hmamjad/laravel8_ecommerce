@@ -14,7 +14,7 @@
         </div>
         <div class="home_overlay"></div>
         <div class="home_content d-flex flex-column align-items-center justify-content-center">
-            <h2 class="home_title">{{ $childcategory->childcategory_name}}</h2>
+            <h2 class="home_title">{{ $brand->brand_name}}</h2>
         </div>
     </div>
 {{-- brand --}}
@@ -27,10 +27,10 @@
                         <!-- Brands Slider -->
 
                         <div class="owl-carousel owl-theme brands_slider">
-                            @foreach ($brand as $row)
+                            @foreach ($brands as $row)
                                 <div class="owl-item">
                                     <div class="brands_item d-flex flex-column justify-content-center">
-                                        <a href="{{ route('brandwise.product', $row->id) }}" title="{{ $row->brand_name }}"> <img
+                                        <a href="{{ route('brandwise.product', $row->id) }}"  title="{{ $row->brand_name }}"> <img
                                                 src="{{ asset($row->brand_logo) }}" alt="{{ $row->brand_name }}"
                                                 height="50" width="40"> </a>
                                     </div>
@@ -60,7 +60,7 @@
                         <div class="sidebar_section">
                             <div class="sidebar_title">Categories</div>
                             <ul class="sidebar_categories">
-                                @foreach ($category as $row)
+                                @foreach ($categories as $row)
                                 <li><a href="{{route('categorywise.product',$row->id)}}">{{$row->category_name}}</a></li>
                                 @endforeach
                                

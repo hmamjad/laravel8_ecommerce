@@ -13,49 +13,7 @@
                 </div>
 
                 <div class="card-body">
-                   <div class="row">
-                       <div class="col-lg-3">
-                           <a href=""> 
-                             <div class="card" >
-                               <div class="card-body">
-                                 <h5 class="card-title text-success text-center">Total Order</h5>
-                                 <h6 class="card-subtitle mb-2 text-muted text-center">Total order</h6> {{-- {{ $total_order }} --}}
-                               </div>
-                             </div>
-                           </a>
-                       </div>
-                       <div class="col-lg-3">
-                           <a href=""> 
-                             <div class="card" >
-                               <div class="card-body">
-                                 <h5 class="card-title text-success text-center">Complete Order</h5>
-                                 <h6 class="card-subtitle mb-2 text-muted text-center">complete_order</h6> {{-- {{ $complete_order }} --}}
-                               </div>
-                             </div>
-                           </a>
-                       </div>
-                       <div class="col-lg-3">
-                           <a href=""> 
-                             <div class="card" >
-                               <div class="card-body">
-                                 <h5 class="card-title text-danger text-center">Cancel Order</h5>
-                                 <h6 class="card-subtitle mb-2 text-muted text-center">cancel_order</h6> {{-- {{ $cancel_order }} --}}
-                               </div>
-                             </div>
-                           </a>
-                       </div>
-                       <div class="col-lg-3">
-                          <a href=""> 
-                            <div class="card" >
-                              <div class="card-body">
-                                <h5 class="card-title text-warning text-center">Return Order</h5>
-                                <h6 class="card-subtitle mb-2 text-muted text-center">return_order</h6> {{-- {{ $return_order }} --}}
-                              </div>
-                            </div>
-                          </a>
-                       </div>
-                   </div><br>
-                   <h4>Recent Order</h4>
+                   <h4>My All Order</h4>
                    <div>
                        <table class="table">
                          <thead>
@@ -65,10 +23,11 @@
                              <th scope="col">Total</th>
                              <th scope="col">Payment Type</th>
                              <th scope="col">Status</th>
+                             <th scope="col">Action</th>
                            </tr>
                          </thead>
                          <tbody>
-                          {{-- @foreach($orders as $row)
+                          @foreach($orders as $row)
                            <tr>
                              <th scope="row">{{ $row->order_id }}</th>
                              <td>{{ date('d F , Y') ,strtotime($row->order_id)  }}</td>
@@ -89,8 +48,11 @@
                                  <span class="badge badge-danger">Order Cancel</span>
                               @endif          
                             </td>
+                            <td>
+                            	<a href="{{ route('view.order',$row->id) }}" class="btn btn-sm btn-info" title="view order"><i class="fa fa-eye"></i></a>
+                            </td>
                            </tr>
-                          @endforeach  --}}
+                          @endforeach 
                          </tbody>
                        </table>
                    </div>
