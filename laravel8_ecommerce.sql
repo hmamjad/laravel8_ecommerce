@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2024 at 01:26 PM
+-- Generation Time: Jan 22, 2024 at 01:18 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -165,7 +165,9 @@ CREATE TABLE `coupons` (
 --
 
 INSERT INTO `coupons` (`id`, `coupon_code`, `valid_date`, `type`, `coupon_amount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'coupon-1000', '2024-01-10', 1, 1000, 'Active', NULL, NULL);
+(1, 'coupon-1000', '2024-01-10', 1, 1000, 'Active', NULL, NULL),
+(2, 'coupon-2000', '2024-01-22', 1, 2000, 'Active', NULL, NULL),
+(3, 'coupon-3000', '2024-01-22', 1, 3000, 'Active', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -221,7 +223,28 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (185, '2024_01_14_093211_create_campaigns_table', 4),
 (186, '2018_12_23_120000_create_shoppingcart_table', 5),
 (187, '2024_01_21_071641_create_wbreviews_table', 5),
-(188, '2024_01_21_094351_create_shippings_table', 6);
+(188, '2024_01_21_094351_create_shippings_table', 6),
+(189, '2024_01_22_054328_create_newsletters_table', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newsletters`
+--
+
+CREATE TABLE `newsletters` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `newsletters`
+--
+
+INSERT INTO `newsletters` (`id`, `email`, `created_at`, `updated_at`) VALUES
+(1, 'amjad@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -361,9 +384,9 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `color`, `size`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `product_views`, `trendy`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
 (25, 7, 5, NULL, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', NULL, '80', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\"]', 1, 1, 1, 1, 65, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-21 03:10:34'),
-(26, 7, 6, NULL, 21, 1, 'Omron MC-246 (MC246) 60 Second Digital Rigid Thermometer', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer', 'MC-246', 'xyz', 'MC-246', 'white,red,green', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer.jpg', '[\"1788146579104160.jpg\",\"1788146579163854.jpg\"]', 1, 1, 1, 1, 81, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-20 04:48:08'),
+(26, 7, 6, NULL, 21, 1, 'Omron MC-246 (MC246) 60 Second Digital Rigid Thermometer', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer', 'MC-246', 'xyz', 'MC-246', 'white,red,green', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer.jpg', '[\"1788146579104160.jpg\",\"1788146579163854.jpg\"]', 1, 1, 1, 1, 89, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-22 04:08:16'),
 (27, 7, 7, NULL, 22, 1, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'other-colors-available-30-black-27-inch', '6186C', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'other-colors-available-30-black-27-inch.jpg', '[\"1788148599298040.jpg\",\"1788148599476646.jpg\"]', 1, 1, 1, 1, 93, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-20 04:48:04'),
-(28, 7, 5, 3, 20, 1, 'x-ray', 'x-ray', 'x-123', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '14000', '12000', '47', 1, '<p>good product</p>', 'x-ray.jpg', '[\"1788610508116840.jpg\",\"1788610508153374.jpg\",\"1788610508207268.jpg\"]', 1, 1, 1, 1, 8, 1, NULL, NULL, 1, '20-01-2024', 'January', '2024', NULL, '2024-01-21 01:56:57');
+(28, 7, 5, 3, 20, 1, 'x-ray', 'x-ray', 'x-123', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '14000', '12000', '47', 1, '<p>good product</p>', 'x-ray.jpg', '[\"1788610508116840.jpg\",\"1788610508153374.jpg\",\"1788610508207268.jpg\"]', 1, 1, 1, 1, 16, 1, NULL, NULL, 1, '20-01-2024', 'January', '2024', NULL, '2024-01-22 04:13:24');
 
 -- --------------------------------------------------------
 
@@ -565,7 +588,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ph
 (1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$2VkqQcOhq1CiQRJVEbZjnumDXt9tt8az03K0sPANnaV2W59pAumY2', NULL, '1', NULL, '2024-01-02 04:31:52', '2024-01-02 04:31:52'),
 (2, 'Amjad', 'amjad@gmail.com', NULL, '$2y$10$2VkqQcOhq1CiQRJVEbZjnumDXt9tt8az03K0sPANnaV2W59pAumY2', NULL, NULL, NULL, '2024-01-03 23:20:20', '2024-01-03 23:20:20'),
 (3, 'Jabed', 'jabed@gmail.com', NULL, '$2y$10$2VkqQcOhq1CiQRJVEbZjnumDXt9tt8az03K0sPANnaV2W59pAumY2', NULL, NULL, NULL, '2024-01-04 00:13:54', '2024-01-04 00:13:54'),
-(4, 'Rana', 'rana@gmail.com', NULL, '$2y$10$8N0CKee2itgC0BL8naRtb.fztIId5JwNFPV4nHzhkRzxPLwgyJorS', NULL, NULL, NULL, NULL, '2024-01-21 04:12:02'),
+(4, 'Rana', 'rana@gmail.com', NULL, '$2y$10$8N0CKee2itgC0BL8naRtb.fztIId5JwNFPV4nHzhkRzxPLwgyJorS', '01776102769', NULL, NULL, NULL, '2024-01-21 04:12:02'),
 (5, 'Hossain', 'hossain@gmail.com', NULL, '$2y$10$2VkqQcOhq1CiQRJVEbZjnumDXt9tt8az03K0sPANnaV2W59pAumY2', NULL, NULL, NULL, NULL, NULL),
 (6, 'Mamun', 'mamun@gmail.com', NULL, '$2y$10$UgL/KENZFXpWI5uSEE0eG.wquy54xHAsmVcbxAsX4pfUvUtDMqpRi', NULL, NULL, NULL, '2024-01-13 03:23:36', '2024-01-13 03:23:36');
 
@@ -691,6 +714,12 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `newsletters`
+--
+ALTER TABLE `newsletters`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -833,7 +862,7 @@ ALTER TABLE `childcategories`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -845,7 +874,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+
+--
+-- AUTO_INCREMENT for table `newsletters`
+--
+ALTER TABLE `newsletters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pages`

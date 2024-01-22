@@ -37,7 +37,7 @@
                                                 <div class="cart_item_text">{{ substr($row->name, 0, 15) }}..</div>
                                             </div>
 
-                                            @if ($row->options->color != null)
+                                            @if ($row->options->size != null)
                                                 <div class="cart_item_color cart_info_col">
                                                     <div class="cart_item_title">Size</div>
                                                     <div class="cart_item_text">
@@ -113,7 +113,7 @@
 
                         <div class="cart_buttons">
                             <a href="{{ route('cart.empty') }}" class="button cart_button_clear btn-danger">Empty Cart</a>
-                            <button type="button" class="button cart_button_checkout">Checkout</button>
+                            <a href="{{ route('checkout') }}" class="button cart_button_checkout">Checkout</a>
                         </div>
                     </div>
                 </div>

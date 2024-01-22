@@ -820,7 +820,7 @@
                             </div>
                         </div>
                         <div class="newsletter_content clearfix">
-                            <form action="#" method="post" class="newsletter_form" id="newsletter_form">
+                            <form action="{{route('store.newsletter')}}" method="post" class="newsletter_form" id="newsletter_form">
                                 @csrf
                                 <input type="email" name="email" class="newsletter_input" required="required"
                                     placeholder="Enter your email address">
@@ -858,8 +858,6 @@
         //ajax request send for collect childcategory
         $(document).on('click', '.quick_view', function() {
             var id = $(this).attr("id");
-
-
             $.ajax({
                 url: "{{ url('/product-quick-view/') }}/" + id,
                 type: 'get',
@@ -869,7 +867,7 @@
             });
         });
 
-        //store coupon ajax call
+        //store newsletter ajax call
         $('#newsletter_form').submit(function(e) {
             e.preventDefault();
             var url = $(this).attr('action');

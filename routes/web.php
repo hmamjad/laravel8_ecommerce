@@ -29,7 +29,8 @@ Route::get('/customer/logout', [App\Http\Controllers\HomeController::class, 'log
 // Frontend All Routes
 Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
 
-    Route::get('/', 'IndexController@index');
+    // Route::get('/', 'IndexController@index'); I changed it
+    Route::get('/', 'IndexController@index')->name('front.index');
     Route::get('/product-details/{slug}', 'IndexController@ProductDetails')->name('product.details');
 
     // Review for porduct
@@ -53,6 +54,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     Route::get('cartproduct/updatecolor/{rowId}/{color}', 'CartController@UpdateColor');
     Route::get('cartproduct/updatesize/{rowId}/{size}', 'CartController@UpdateSize');
     Route::get('/cart/empty', 'CartController@EmptyCart')->name('cart.empty');
+    // Checkout and coupon
+    Route::get('/checkout', 'CheckoutController@Checkout')->name('checkout');
+    Route::post('/apply/coupon', 'CheckoutController@ApplyCoupon')->name('apply.coupon');
+    Route::get('/remove/coupon', 'CheckoutController@RemoveCoupon')->name('coupon.remove');
 
 
     // Category wise products
@@ -72,5 +77,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
 
     // page view
     Route::get('/page/{page_slug}', 'IndexController@ViewPage')->name('view.page');
+
+    // News letter
+    Route::post('/store/newsletter', 'IndexController@storeNewsletter')->name('store.newsletter');
 
 });

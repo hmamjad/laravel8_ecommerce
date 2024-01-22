@@ -33,7 +33,8 @@ class HomeController extends Controller
     public function logout()
     {
         Auth::logout();
-        return Redirect()->back();
+        // return Redirect()->back();
+        return Redirect()->route('front.index');
     }
     
 }
