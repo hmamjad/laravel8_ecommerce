@@ -54,10 +54,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     Route::get('cartproduct/updatecolor/{rowId}/{color}', 'CartController@UpdateColor');
     Route::get('cartproduct/updatesize/{rowId}/{size}', 'CartController@UpdateSize');
     Route::get('/cart/empty', 'CartController@EmptyCart')->name('cart.empty');
-    // Checkout and coupon
+    // Checkout, coupon and order place
     Route::get('/checkout', 'CheckoutController@Checkout')->name('checkout');
     Route::post('/apply/coupon', 'CheckoutController@ApplyCoupon')->name('apply.coupon');
     Route::get('/remove/coupon', 'CheckoutController@RemoveCoupon')->name('coupon.remove');
+    Route::post('/order/place', 'CheckoutController@OrderPlace')->name('order.place');
 
 
     // Category wise products

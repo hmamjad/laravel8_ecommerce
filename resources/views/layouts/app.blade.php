@@ -369,7 +369,7 @@
     <script src="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.js"></script>
     <script src="{{ asset('frontend') }}/plugins/easing/easing.js"></script>
     <script src="{{ asset('frontend') }}/js/custom.js"></script>
-    {{-- <script src="{{ asset('frontend') }}/js/product_custom.js"></script> --}}
+    <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
     <script type="text/javascript" src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 
      {{-- Toster part --}}
