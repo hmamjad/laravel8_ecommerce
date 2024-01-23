@@ -8,6 +8,8 @@ use Auth;
 use Cart;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Mail;
+use App\Mail\InvoiceMail;
 
 class CheckoutController extends Controller
 {
@@ -83,16 +85,15 @@ class CheckoutController extends Controller
         $order['c_city'] = $request->c_city;
 
         if(Session::has('coupon')){
-            $order['subtotal'] = Cart::subtotal();
-            $order['total'] = Cart::total();
+            $order['subtotal'] = Cart::subtotal();  //etao condition er bahire raKha jay
             $order['coupon_code'] = Session::get('coupon')['name'];
             $order['coupon_discount'] = Session::get('coupon')['discount'];
             $order['after_discount'] =  Session::get('coupon')['after_discount'];
         }else{
-            $order['subtotal'] = Cart::subtotal();
-            $order['total'] = Cart::total();
+            $order['subtotal'] = Cart::subtotal(); //etao condition er bahire raKha jay
         }
 
+        $order['total'] = Cart::total();
         $order['payment_type'] = $request->payment_type;
         $order['tax'] = 0;
         $order['shipping_charge'] = 0;
@@ -103,6 +104,8 @@ class CheckoutController extends Controller
         $order['year'] = date('Y');
 
         $order_id = DB::table('orders')->insertGetId($order); // get id for order_details table
+
+        // Mail::to($request->c_email)->send(new InvoiceMail($order)); //for mail send,You can send to auth maio also
 
 
         // order_details table

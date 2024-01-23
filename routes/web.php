@@ -75,11 +75,18 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     // setting profile 
     Route::get('/customer/setting', 'ProfileController@setting')->name('customer.setting');
     Route::post('/home/password/update', 'ProfileController@PasswordChange')->name('customer.password.change');
+    Route::get('/my/order', 'ProfileController@MyOrder')->name('my.order');
+    Route::get('/view/order/{id}', 'ProfileController@ViewOrder')->name('view.order');
 
     // page view
     Route::get('/page/{page_slug}', 'IndexController@ViewPage')->name('view.page');
 
     // News letter
     Route::post('/store/newsletter', 'IndexController@storeNewsletter')->name('store.newsletter');
+
+
+    // Order tracking
+    Route::get('/order/tracking', 'IndexController@OrderTracking')->name('order.tracking');
+    Route::post('/check/order', 'IndexController@CheckOrder')->name('check.order');
 
 });

@@ -19,7 +19,7 @@
                              <div class="card" >
                                <div class="card-body">
                                  <h5 class="card-title text-success text-center">Total Order</h5>
-                                 <h6 class="card-subtitle mb-2 text-muted text-center">Total order</h6> {{-- {{ $total_order }} --}}
+                                 <h6 class="card-subtitle mb-2 text-muted text-center">{{ $total_order }}</h6> 
                                </div>
                              </div>
                            </a>
@@ -29,7 +29,7 @@
                              <div class="card" >
                                <div class="card-body">
                                  <h5 class="card-title text-success text-center">Complete Order</h5>
-                                 <h6 class="card-subtitle mb-2 text-muted text-center">complete_order</h6> {{-- {{ $complete_order }} --}}
+                                 <h6 class="card-subtitle mb-2 text-muted text-center">{{ $complete_order }}</h6> 
                                </div>
                              </div>
                            </a>
@@ -39,7 +39,7 @@
                              <div class="card" >
                                <div class="card-body">
                                  <h5 class="card-title text-danger text-center">Cancel Order</h5>
-                                 <h6 class="card-subtitle mb-2 text-muted text-center">cancel_order</h6> {{-- {{ $cancel_order }} --}}
+                                 <h6 class="card-subtitle mb-2 text-muted text-center">{{ $cancel_order }}</h6> 
                                </div>
                              </div>
                            </a>
@@ -49,7 +49,7 @@
                             <div class="card" >
                               <div class="card-body">
                                 <h5 class="card-title text-warning text-center">Return Order</h5>
-                                <h6 class="card-subtitle mb-2 text-muted text-center">return_order</h6> {{-- {{ $return_order }} --}}
+                                <h6 class="card-subtitle mb-2 text-muted text-center">{{ $return_order }}</h6> 
                               </div>
                             </div>
                           </a>
@@ -68,7 +68,7 @@
                            </tr>
                          </thead>
                          <tbody>
-                          {{-- @foreach($orders as $row)
+                          @foreach($orders as $row)
                            <tr>
                              <th scope="row">{{ $row->order_id }}</th>
                              <td>{{ date('d F , Y') ,strtotime($row->order_id)  }}</td>
@@ -90,7 +90,7 @@
                               @endif          
                             </td>
                            </tr>
-                          @endforeach  --}}
+                          @endforeach 
                          </tbody>
                        </table>
                    </div>
