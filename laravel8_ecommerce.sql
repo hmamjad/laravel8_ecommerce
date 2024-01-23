@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 01:18 PM
+-- Generation Time: Jan 23, 2024 at 12:51 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -224,7 +224,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (186, '2018_12_23_120000_create_shoppingcart_table', 5),
 (187, '2024_01_21_071641_create_wbreviews_table', 5),
 (188, '2024_01_21_094351_create_shippings_table', 6),
-(189, '2024_01_22_054328_create_newsletters_table', 7);
+(189, '2024_01_22_054328_create_newsletters_table', 7),
+(192, '2024_01_22_183548_create_orders_table', 8),
+(193, '2024_01_22_183611_create_order_details_table', 8);
 
 -- --------------------------------------------------------
 
@@ -245,6 +247,83 @@ CREATE TABLE `newsletters` (
 
 INSERT INTO `newsletters` (`id`, `email`, `created_at`, `updated_at`) VALUES
 (1, 'amjad@gmail.com', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `c_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_zipcode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_extra_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subtotal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_discount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `after_discount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_charge` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `month` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `year` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `c_name`, `c_phone`, `c_email`, `c_country`, `c_zipcode`, `c_address`, `c_extra_phone`, `c_city`, `subtotal`, `total`, `coupon_code`, `coupon_discount`, `after_discount`, `payment_type`, `tax`, `shipping_charge`, `order_id`, `status`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Amjad', '01776102769', 'hmamjad@gmail.com', 'Bangladesh', '1212', 'Banasree', '01303096617', 'Khilgaon', '12000.00', '12000.00', 'coupon-2000', '2000', '10000', 'Hand Cash', '0', '0', '15960', 0, '22-01-2024', 'January', '2024', NULL, NULL),
+(2, 4, 'Rana', '01776102769', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '12000.00', '12000.00', NULL, NULL, NULL, 'Hand Cash', '0', '0', '62041', 0, '23-01-2024', 'January', '2024', NULL, NULL),
+(4, 4, 'Rana', '01776102769', 'hmamjad999@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '12000.00', '12000.00', NULL, NULL, NULL, 'Aamarpay', '0', '0', '13602', 0, '23-01-2024', 'January', '2024', NULL, NULL),
+(17, 4, 'Rana', '01776102769', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '16000.00', '16000.00', NULL, NULL, NULL, 'Aamarpay', '0', '0', '88857', 0, '23-01-2024', 'January', '2024', NULL, NULL),
+(18, 2, 'Amjad', '01776102769', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '15500.00', '15500.00', NULL, NULL, NULL, 'Aamarpay', '0', '0', '86220', 0, '23-01-2024', 'January', '2024', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quantity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `single_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subtotal_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_name`, `color`, `size`, `quantity`, `single_price`, `subtotal_price`, `created_at`, `updated_at`) VALUES
+(1, 1, 28, 'x-ray', 'red', '10', '1', '12000', '12000', NULL, NULL),
+(2, 2, 28, 'x-ray', 'red', '10', '1', '12000', '12000', NULL, NULL),
+(3, 4, 28, 'x-ray', 'red', '10', '1', '12000', '12000', NULL, NULL),
+(4, 11, 27, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'red', '10', '2', '15500', '31000', NULL, NULL),
+(5, 17, 25, 'MARS 40 - 80 FIXED X-RAY', 'red', '30', '1', '16000', '16000', NULL, NULL),
+(6, 18, 27, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'red', '10', '1', '15500', '15500', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -383,10 +462,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `color`, `size`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `product_views`, `trendy`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(25, 7, 5, NULL, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', NULL, '80', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\"]', 1, 1, 1, 1, 65, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-21 03:10:34'),
+(25, 7, 5, NULL, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', NULL, '80', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\"]', 1, 1, 1, 1, 69, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-23 02:40:47'),
 (26, 7, 6, NULL, 21, 1, 'Omron MC-246 (MC246) 60 Second Digital Rigid Thermometer', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer', 'MC-246', 'xyz', 'MC-246', 'white,red,green', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer.jpg', '[\"1788146579104160.jpg\",\"1788146579163854.jpg\"]', 1, 1, 1, 1, 89, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-22 04:08:16'),
-(27, 7, 7, NULL, 22, 1, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'other-colors-available-30-black-27-inch', '6186C', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'other-colors-available-30-black-27-inch.jpg', '[\"1788148599298040.jpg\",\"1788148599476646.jpg\"]', 1, 1, 1, 1, 93, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-20 04:48:04'),
-(28, 7, 5, 3, 20, 1, 'x-ray', 'x-ray', 'x-123', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '14000', '12000', '47', 1, '<p>good product</p>', 'x-ray.jpg', '[\"1788610508116840.jpg\",\"1788610508153374.jpg\",\"1788610508207268.jpg\"]', 1, 1, 1, 1, 16, 1, NULL, NULL, 1, '20-01-2024', 'January', '2024', NULL, '2024-01-22 04:13:24');
+(27, 7, 7, NULL, 22, 1, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'other-colors-available-30-black-27-inch', '6186C', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'other-colors-available-30-black-27-inch.jpg', '[\"1788148599298040.jpg\",\"1788148599476646.jpg\"]', 1, 1, 1, 1, 97, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-23 05:47:49'),
+(28, 7, 5, 3, 20, 1, 'x-ray', 'x-ray', 'x-123', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '14000', '12000', '47', 1, '<p>good product</p>', 'x-ray.jpg', '[\"1788610508116840.jpg\",\"1788610508153374.jpg\",\"1788610508207268.jpg\"]', 1, 1, 1, 1, 27, 1, NULL, NULL, 1, '20-01-2024', 'January', '2024', NULL, '2024-01-23 00:20:29');
 
 -- --------------------------------------------------------
 
@@ -662,7 +741,6 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `date`, `created_at`, `updated_at`) VALUES
-(7, 2, 27, NULL, NULL, NULL),
 (18, 3, 27, '20, January 2024', NULL, NULL),
 (19, 3, 25, '20, January 2024', NULL, NULL),
 (20, 3, 26, '20, January 2024', NULL, NULL);
@@ -720,6 +798,18 @@ ALTER TABLE `migrations`
 -- Indexes for table `newsletters`
 --
 ALTER TABLE `newsletters`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -874,13 +964,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 
 --
 -- AUTO_INCREMENT for table `newsletters`
 --
 ALTER TABLE `newsletters`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pages`
