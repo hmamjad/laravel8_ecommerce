@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2024 at 12:51 PM
+-- Generation Time: Jan 27, 2024 at 01:10 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -110,8 +110,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `icon`, `home_page`, `created_at`, `updated_at`) VALUES
-(1, 'Mens Feshion', 'mens-feshion', 'files/category/mens-feshion.png', 1, NULL, NULL),
-(2, 'Women Feshion', 'women-feshion', 'files/category/women-feshion.png', 1, NULL, NULL),
+(1, 'Mens Feshion', 'mens-feshion', 'files/category/mens-feshion.png', 0, NULL, NULL),
+(2, 'Women Feshion', 'women-feshion', 'files/category/women-feshion.png', 0, NULL, NULL),
 (3, 'Electronics', 'electronics', 'files/category/electronics.png', 0, NULL, NULL),
 (4, 'Furnitures', 'furnitures', 'files/category/furnitures.png', 0, NULL, '2024-01-14 19:30:16'),
 (5, 'Vehicle', 'vehicle', 'files/category/vehicle.jpeg', 0, NULL, NULL),
@@ -142,6 +142,30 @@ INSERT INTO `childcategories` (`id`, `category_id`, `subcategory_id`, `childcate
 (1, 1, 1, 'Casual shoe', 'casual-shoe', NULL, NULL),
 (2, 2, 2, 'Red shoe', 'red-shoe', NULL, NULL),
 (3, 7, 5, 'plain x-ray', 'plain-x-ray', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `phone`, `message`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Amjad', 'hmamjad999@gmail.com', '01776102769', 'dsafd', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -226,7 +250,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (188, '2024_01_21_094351_create_shippings_table', 6),
 (189, '2024_01_22_054328_create_newsletters_table', 7),
 (192, '2024_01_22_183548_create_orders_table', 8),
-(193, '2024_01_22_183611_create_order_details_table', 8);
+(193, '2024_01_22_183611_create_order_details_table', 8),
+(194, '2024_01_27_094509_create_contacts_table', 9);
 
 -- --------------------------------------------------------
 
@@ -287,11 +312,12 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `c_name`, `c_phone`, `c_email`, `c_country`, `c_zipcode`, `c_address`, `c_extra_phone`, `c_city`, `subtotal`, `total`, `coupon_code`, `coupon_discount`, `after_discount`, `payment_type`, `tax`, `shipping_charge`, `order_id`, `status`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Amjad', '01776102769', 'hmamjad@gmail.com', 'Bangladesh', '1212', 'Banasree', '01303096617', 'Khilgaon', '12000.00', '12000.00', 'coupon-2000', '2000', '10000', 'Hand Cash', '0', '0', '15960', 0, '22-01-2024', 'January', '2024', NULL, NULL),
-(2, 4, 'Rana', '01776102769', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '12000.00', '12000.00', NULL, NULL, NULL, 'Hand Cash', '0', '0', '62041', 0, '23-01-2024', 'January', '2024', NULL, NULL),
+(1, 2, 'Amjad', '01776102769', 'hmamjad@gmail.com', 'Bangladesh', '1212', 'Banasree', '01303096617', 'Khilgaon', '12000.00', '12000.00', 'coupon-2000', '2000', '10000', 'Hand Cash', '0', '0', '15960', 3, '22-01-2024', 'January', '2024', NULL, NULL),
+(2, 4, 'Rana', '01776102770', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree,E-Block', '01776102769', 'Khilgaon', '12000.00', '12000.00', NULL, NULL, NULL, 'Hand Cash', '0', '0', '62041', 0, '23-01-2024', 'January', '2024', NULL, NULL),
 (4, 4, 'Rana', '01776102769', 'hmamjad999@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '12000.00', '12000.00', NULL, NULL, NULL, 'Aamarpay', '0', '0', '13602', 0, '23-01-2024', 'January', '2024', NULL, NULL),
 (17, 4, 'Rana', '01776102769', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '16000.00', '16000.00', NULL, NULL, NULL, 'Aamarpay', '0', '0', '88857', 0, '23-01-2024', 'January', '2024', NULL, NULL),
-(18, 2, 'Amjad', '01776102769', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '15500.00', '15500.00', NULL, NULL, NULL, 'Aamarpay', '0', '0', '86220', 0, '23-01-2024', 'January', '2024', NULL, NULL);
+(18, 2, 'Amjad', '01776102769', 'rana@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '15500.00', '15500.00', NULL, NULL, NULL, 'Aamarpay', '0', '0', '86220', 0, '23-01-2024', 'January', '2024', NULL, NULL),
+(19, 2, 'Amjad', '01776102769', 'hmamjad999@gmail.com', 'Bangladesh', '1212', 'Banasree', '01776102769', 'Khilgaon', '24000.00', '24000.00', NULL, NULL, NULL, 'Hand Cash', '0', '0', '11959', 3, '27-01-2024', 'January', '2024', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -323,7 +349,8 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_name`, `co
 (3, 4, 28, 'x-ray', 'red', '10', '1', '12000', '12000', NULL, NULL),
 (4, 11, 27, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'red', '10', '2', '15500', '31000', NULL, NULL),
 (5, 17, 25, 'MARS 40 - 80 FIXED X-RAY', 'red', '30', '1', '16000', '16000', NULL, NULL),
-(6, 18, 27, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'red', '10', '1', '15500', '15500', NULL, NULL);
+(6, 18, 27, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'red', '10', '1', '15500', '15500', NULL, NULL),
+(7, 19, 28, 'x-ray', 'white', '20', '2', '12000', '24000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -462,10 +489,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `color`, `size`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `product_views`, `trendy`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(25, 7, 5, NULL, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', NULL, '80', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\"]', 1, 1, 1, 1, 69, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-23 02:40:47'),
+(25, 7, 7, 3, 20, 1, 'MARS 40 - 80 FIXED X-RAY', 'mars-40-80-fixed-x-ray', 'MARS 40', 'xyz', 'xyz', 'red,white,yellow', '30,40,50', 'BIt9o4zCWCQ', '15000', '16000', NULL, '0', 1, '<p>This is good product</p>', 'mars-40-80-fixed-x-ray.jpg', '[\"1788144676259308.jpg\",\"1788144676296127.jpg\",\"1788144676332558.jpg\",\"1789231125518600.png\",\"1789231470494089.jpg\"]', 1, 1, 1, 1, 73, NULL, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-27 04:57:57'),
 (26, 7, 6, NULL, 21, 1, 'Omron MC-246 (MC246) 60 Second Digital Rigid Thermometer', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer', 'MC-246', 'xyz', 'MC-246', 'white,red,green', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'omron-mc-246-mc246-60-second-digital-rigid-thermometer.jpg', '[\"1788146579104160.jpg\",\"1788146579163854.jpg\"]', 1, 1, 1, 1, 89, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-22 04:08:16'),
 (27, 7, 7, NULL, 22, 1, 'OTHER COLORS AVAILABLE (30) Black, 27 inch', 'other-colors-available-30-black-27-inch', '6186C', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '16000', '15500', '80', 1, '<p>Good product</p>', 'other-colors-available-30-black-27-inch.jpg', '[\"1788148599298040.jpg\",\"1788148599476646.jpg\"]', 1, 1, 1, 1, 97, 1, NULL, NULL, 1, '15-01-2024', 'January', '2024', NULL, '2024-01-23 05:47:49'),
-(28, 7, 5, 3, 20, 1, 'x-ray', 'x-ray', 'x-123', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '14000', '12000', '47', 1, '<p>good product</p>', 'x-ray.jpg', '[\"1788610508116840.jpg\",\"1788610508153374.jpg\",\"1788610508207268.jpg\"]', 1, 1, 1, 1, 27, 1, NULL, NULL, 1, '20-01-2024', 'January', '2024', NULL, '2024-01-23 00:20:29');
+(28, 7, 5, 3, 20, 1, 'x-ray', 'x-ray', 'x-123', 'xyz', 'xyz', 'red,white,black', '10,20,30', 'BIt9o4zCWCQ', '15000', '14000', '12000', '47', 1, '<p>good product</p>', 'x-ray.jpg', '[\"1788610508116840.jpg\",\"1788610508153374.jpg\",\"1788610508207268.jpg\"]', 1, 1, 1, 1, 33, 1, NULL, NULL, 1, '20-01-2024', 'January', '2024', NULL, '2024-01-27 03:37:25');
 
 -- --------------------------------------------------------
 
@@ -492,7 +519,8 @@ CREATE TABLE `reviews` (
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review`, `review_date`, `review_month`, `review_year`, `rating`, `created_at`, `updated_at`) VALUES
 (12, 2, 26, 'Good product', '16-01-2024', 'January', 2024, 5, NULL, NULL),
-(13, 2, 25, 'This is good produt.I used it.You can buy it.', '17-01-2024', 'January', 2024, 5, NULL, NULL);
+(13, 2, 25, 'This is good produt.I used it.You can buy it.', '17-01-2024', 'January', 2024, 5, NULL, NULL),
+(14, 2, 28, 'This is good product', '27-01-2024', 'January', 2024, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -669,7 +697,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ph
 (3, 'Jabed', 'jabed@gmail.com', NULL, '$2y$10$2VkqQcOhq1CiQRJVEbZjnumDXt9tt8az03K0sPANnaV2W59pAumY2', NULL, NULL, NULL, '2024-01-04 00:13:54', '2024-01-04 00:13:54'),
 (4, 'Rana', 'rana@gmail.com', NULL, '$2y$10$8N0CKee2itgC0BL8naRtb.fztIId5JwNFPV4nHzhkRzxPLwgyJorS', '01776102769', NULL, NULL, NULL, '2024-01-21 04:12:02'),
 (5, 'Hossain', 'hossain@gmail.com', NULL, '$2y$10$2VkqQcOhq1CiQRJVEbZjnumDXt9tt8az03K0sPANnaV2W59pAumY2', NULL, NULL, NULL, NULL, NULL),
-(6, 'Mamun', 'mamun@gmail.com', NULL, '$2y$10$UgL/KENZFXpWI5uSEE0eG.wquy54xHAsmVcbxAsX4pfUvUtDMqpRi', NULL, NULL, NULL, '2024-01-13 03:23:36', '2024-01-13 03:23:36');
+(6, 'Mamun', 'mamun@gmail.com', NULL, '$2y$10$UgL/KENZFXpWI5uSEE0eG.wquy54xHAsmVcbxAsX4pfUvUtDMqpRi', NULL, NULL, NULL, '2024-01-13 03:23:36', '2024-01-13 03:23:36'),
+(7, 'Kamal', 'kamal@gmail.com', NULL, '$2y$10$z9pv7HrlUjUe1vZI9hmLquU4DTgj/bDKxBXpqdBlKTysSOLHUJLgS', NULL, NULL, NULL, '2024-01-27 04:39:48', '2024-01-27 04:39:48');
 
 -- --------------------------------------------------------
 
@@ -743,7 +772,8 @@ CREATE TABLE `wishlists` (
 INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `date`, `created_at`, `updated_at`) VALUES
 (18, 3, 27, '20, January 2024', NULL, NULL),
 (19, 3, 25, '20, January 2024', NULL, NULL),
-(20, 3, 26, '20, January 2024', NULL, NULL);
+(20, 3, 26, '20, January 2024', NULL, NULL),
+(21, 2, 28, '27 , January 2024', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -774,6 +804,12 @@ ALTER TABLE `childcategories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `childcategories_category_id_foreign` (`category_id`),
   ADD KEY `childcategories_subcategory_id_foreign` (`subcategory_id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `coupons`
@@ -949,6 +985,12 @@ ALTER TABLE `childcategories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
@@ -964,7 +1006,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT for table `newsletters`
@@ -976,13 +1018,13 @@ ALTER TABLE `newsletters`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1012,7 +1054,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `seos`
@@ -1048,7 +1090,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `warehouses`
@@ -1066,7 +1108,7 @@ ALTER TABLE `wbreviews`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
