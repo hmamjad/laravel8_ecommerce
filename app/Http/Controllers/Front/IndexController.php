@@ -143,4 +143,33 @@ class IndexController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+
+    // Contact page show
+    public function Contact(){
+        return view('frontend.contact');
+    }
+
+    // Store contact 
+
+    public function Store(Request $request){
+        
+        // quirybuilder
+        $data = array();
+        $data['name'] = $request->contact_form_name;
+        $data['email'] = $request->contact_form_email;
+        $data['phone'] = $request->contact_form_phone;
+        $data['message'] = $request->message;
+
+        DB::table('contacts')->insert($data);
+
+        $notifications = array('messege' => 'Contact Information Send Successfully!', 'alert-type' => 'success');
+        return redirect()->back()->with($notifications);
+       
+    }
+
+
+ 
+ 
+    
 }

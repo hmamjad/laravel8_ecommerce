@@ -230,6 +230,8 @@
           });
         })
       </script>
+
+<script src="{{ asset('backend') }}/plugins/print_this/printThis.js"></script> 
 </body>
 
 </html>

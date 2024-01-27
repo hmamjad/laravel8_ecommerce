@@ -89,4 +89,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Front'], function () {
     Route::get('/order/tracking', 'IndexController@OrderTracking')->name('order.tracking');
     Route::post('/check/order', 'IndexController@CheckOrder')->name('check.order');
 
+    // contact 
+    Route::get('/contact-us', 'IndexController@Contact')->name('contact');
+    Route::post('/contact-store', 'IndexController@Store')->name('contact.store');
+
 });

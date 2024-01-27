@@ -64,10 +64,10 @@
                        <div class="main_nav_menu ml-auto">
                            <ul class="standard_dropdown main_nav_dropdown">
                                <li><a href="{{url('/')}}">Home<i class="fas fa-chevron-down"></i></a></li>
-                               <li><a href="index.html">Campaign<i class="fas fa-chevron-down"></i></a></li>
-                               <li><a href="index.html">Helpline<i class="fas fa-chevron-down"></i></a></li>
-                               <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                               <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                               <li><a href="{{url('/')}}">Campaign<i class="fas fa-chevron-down"></i></a></li>
+                               <li><a href="{{url('/')}}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                               <li><a href="{{route('contact')}}">Contact<i class="fas fa-chevron-down"></i></a></li>
+                               <li><a href="{{url('/')}}">Helpline<i class="fas fa-chevron-down"></i></a></li>
                            </ul>
                        </div>
 

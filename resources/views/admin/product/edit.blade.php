@@ -49,11 +49,12 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('product.update') }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{$product->id}}">
                     <div class="row">
                         <!-- left column -->
-                        <div class="col-md-8">
+                        <div class="col-lg-8">
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
@@ -92,7 +93,9 @@
                                                     <option style="color:blue;" disabled="">{{ $row->category_name }}
                                                     </option>
                                                     @foreach ($subcategory as $row)
-                                                        <option value="{{ $row->id }}"> -- {{ $row->subcategory_name }}
+                                                        <option value="{{ $row->id }}"
+                                                            @if ($row->id == $product->category_id) selected @endif> --
+                                                            {{ $row->subcategory_name }}
                                                         </option>
                                                     @endforeach
                                                 @endforeach
@@ -102,7 +105,11 @@
                                             <label for="exampleInputPassword1">Child category<span
                                                     class="text-danger">*</span> </label>
                                             <select class="form-control" name="childcategory_id" id="childcategory_id">
-
+                                                @foreach ($childcategory as $child)
+                                                    <option value="{{$child->id}}" @if ($child->id == $product->childcategory_id)
+                                                        selected
+                                                @endif>{{ $child->childcategory_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -113,7 +120,9 @@
                                             </label>
                                             <select class="form-control" name="brand_id">
                                                 @foreach ($brand as $row)
-                                                    <option value="{{ $row->id }}">{{ $row->brand_name }}</option>
+                                                    <option value="{{ $row->id }}"
+                                                        @if ($row->id == $product->brand_id) selected @endif>
+                                                        {{ $row->brand_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -121,7 +130,9 @@
                                             <label for="exampleInputPassword1">Pickup Point</label>
                                             <select class="form-control" name="pickup_point_id">
                                                 @foreach ($pickup_point as $row)
-                                                    <option value="{{ $row->id }}">{{ $row->pickup_point_name }}
+                                                    <option value="{{ $row->id }}"
+                                                        @if ($row->id == $product->pickup_point_id) selected @endif>
+                                                        {{ $row->pickup_point_name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -142,19 +153,20 @@
                                     <div class="row">
                                         <div class="form-group col-lg-4">
                                             <label for="exampleInput">Purchase Price </label>
-                                            <input type="text" class="form-control" value="{{ $product->purchase_price }}"
-                                                name="purchase_price">
+                                            <input type="text" class="form-control"
+                                                value="{{ $product->purchase_price }}" name="purchase_price">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="exampleInput">Selling Price <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" name="selling_price"
-                                            value="{{ $product->selling_price }}" class="form-control" required="">
+                                                value="{{ $product->selling_price }}" class="form-control"
+                                                required="">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="exampleInput">Discount Price </label>
                                             <input type="text" name="discount_price"
-                                            value="{{ $product->discount_price }}" class="form-control">
+                                                value="{{ $product->discount_price }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -171,19 +183,19 @@
                                         <div class="form-group col-lg-6">
                                             <label for="exampleInputPassword1">Stock</label>
                                             <input type="text" name="stock_quantity"
-                                            value="{{ $product->stock_quantity }}"  class="form-control">
+                                                value="{{ $product->stock_quantity }}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group col-lg-6">
                                             <label for="exampleInputEmail1">Color</label><br>
-                                            <input type="text" class="form-control" value="{{ $product->color}}"
+                                            <input type="text" class="form-control" value="{{ $product->color }}"
                                                 data-role="tagsinput" name="color" />
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="exampleInputPassword1">Size</label><br>
-                                            <input type="text" class="form-control" value="{{ $product->size}}"
+                                            <input type="text" class="form-control" value="{{ $product->size }}"
                                                 data-role="tagsinput" name="size" />
                                         </div>
                                     </div>
@@ -210,15 +222,17 @@
                         </div>
                         <!-- /.card -->
                         <!-- right column -->
-                        <div class="col-md-4">
+                        <div class="col-lg-4">
                             <!-- Form Element sizes -->
                             <div class="card card-primary">
                                 <div class="card-body">
                                     <div class="form-group">
+                                        <img src="{{asset('files/product/'.$product->thumbnail )}}" alt="" style="height:50px; with:50px">
                                         <label for="exampleInputEmail1">Main Thumbnail <span class="text-danger">*</span>
                                         </label><br>
-                                        <input type="file" name="thumbnail" required="" accept="image/*"
+                                        <input type="file" name="thumbnail"  accept="image/*"
                                             class="dropify">
+                                        <input type="hidden" name="old_thumbnail" value="{{ $product->thumbnail }}">
                                     </div><br>
                                     <div class="">
                                         <table class="table table-bordered" id="dynamic_field">
@@ -228,39 +242,70 @@
                                             <tr>
                                                 <td><input type="file" accept="image/*" name="images[]"
                                                         class="form-control name_list" /></td>
+
                                                 <td><button type="button" name="add" id="add"
                                                         class="btn btn-success">Add</button></td>
                                             </tr>
+
+                                            {{-- show old images --}}
+                                            @php
+                                                $images = json_decode($product->images, true);
+                                            @endphp
+
+                                            @if (!$images)
+                                            @else
+                                                <div class="row">
+                                                    @foreach ($images as $key => $image)
+                                                        <div class="col-md-4">
+                                                            <img src="{{ asset('files/product/'.$image) }}" alt=""
+                                                                style="width: 100px; height:80px; padding:10px">
+                                                            <input type="hidden" name="old_images[]"
+                                                                value="{{ $image }}">
+                                                            <button type="button" class="remove-files"
+                                                                style="border:none;">X</button>
+                                                        </div>
+                                                    @endforeach
+
+                                                </div>
+                                            @endif
+
+
+
+
                                         </table>
                                     </div>
                                     <div class="card p-4">
                                         <h6>Featured Product</h6>
-                                        <input type="checkbox" name="featured" value="1" @if($product->featured == 1) checked @endif      
-                                            data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                        <input type="checkbox" name="featured" value="1"
+                                            @if ($product->featured == 1) checked @endif data-bootstrap-switch
+                                            data-off-color="danger" data-on-color="success">
                                     </div>
 
                                     <div class="card p-4">
                                         <h6>Today Deal</h6>
-                                        <input type="checkbox" name="today_deal" value="1" @if($product->today_deal == 1) checked @endif
-                                            data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                        <input type="checkbox" name="today_deal" value="1"
+                                            @if ($product->today_deal == 1) checked @endif data-bootstrap-switch
+                                            data-off-color="danger" data-on-color="success">
                                     </div>
 
                                     <div class="card p-4">
                                         <h6>Slider Product</h6>
-                                        <input type="checkbox" name="product_slider" value="1"  @if($product->product_slider == 1) checked @endif data-bootstrap-switch
+                                        <input type="checkbox" name="product_slider" value="1"
+                                            @if ($product->product_slider == 1) checked @endif data-bootstrap-switch
                                             data-off-color="danger" data-on-color="success">
                                     </div>
 
                                     {{-- <div class="card p-4">
                                         <h6>Trendy Product</h6>
-                                        <input type="checkbox" name="trendy" value="1"  @if($product->trendy == 1) checked @endif data-bootstrap-switch
+                                        <input type="checkbox" name="trendy" value="1"  @if ($product->trendy == 1) checked @endif data-bootstrap-switch
                                             data-off-color="danger" data-on-color="success">
                                     </div> --}}
 
                                     <div class="card p-4">
                                         <h6>Status</h6>
-                                        <input type="checkbox" name="status" value="1"  @if($product->status == 1) checked @endif
-                                            data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                        <input type="checkbox" name="status" value="1"
+                                            @if ($product->status == 1) checked @endif data-bootstrap-switch
+                                            data-off-color="danger" data-on-color="success">
                                     </div>
 
                                 </div>
@@ -277,7 +322,8 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript"
+        src="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
     <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
     <script src="{{ asset('backend') }}/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
@@ -324,6 +370,11 @@
                 var button_id = $(this).attr("id");
                 $('#row' + button_id + '').remove();
             });
+        });
+
+        // product edit remove file
+        $('.remove-files').on('click',function(){
+            $(this).parents(".col-md-4").remove();
         });
 
 

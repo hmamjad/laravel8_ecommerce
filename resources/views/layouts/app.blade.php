@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/bootstrap4/bootstrap.min.css">
     <link href="{{ asset('frontend') }}/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet"
         type="text/css">
@@ -23,15 +23,15 @@
         href="{{ asset('frontend') }}/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/plugins/slick-1.8.0/slick.css">
-{{-- ei part upore thakbe --}}
+    {{-- ei part upore thakbe --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/product_responsive.css">
 
-{{-- ei part Nicha thakbe --}}
+    {{-- ei part Nicha thakbe --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/responsive.css">
 
-    
+
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/plugins/toastr/toastr.css') }}">
 
 
@@ -82,66 +82,74 @@
                                     </ul>
                                 </div> --}}
 
-                                @if(Auth::check())
-                                <div class="top_bar_menu">
-                                    <ul class="standard_dropdown top_bar_dropdown" >
-                                        <li>
-                                            <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
-                                            <ul style="width:200px;">
-                                                <li><a href="{{ route('home') }}">Profile</a></li>
-                                                <li><a href="{{ route('customer.logout') }}">Logout</a></li>
-                                            </ul>
-                                        </li>
-                                      
-                                    </ul>
-                                </div>
+                                @if (Auth::check())
+                                    <div class="top_bar_menu">
+                                        <ul class="standard_dropdown top_bar_dropdown">
+                                            <li>
+                                                <a href="#">{{ Auth::user()->name }}<i
+                                                        class="fas fa-chevron-down"></i></a>
+                                                <ul style="width:200px;">
+                                                    <li><a href="{{ route('home') }}">Profile</a></li>
+                                                    <li><a href="{{ route('customer.logout') }}">Logout</a></li>
+                                                </ul>
+                                            </li>
+
+                                        </ul>
+                                    </div>
                                 @endif
 
                                 @guest
-                                <div class="top_bar_menu">
-                                    <ul class="standard_dropdown top_bar_dropdown">
-                                        <li>
-                                            <a href="#">Login<i class="fas fa-chevron-down"></i></a>
-                                            <ul style="width:300px; padding:10px;">
-                                               <div>
-                                                <strong>login your account</strong><br>
-                                                <br>
-                                                   <form action="{{ route('login') }}" method="post">
-                                                    @csrf
-                                                       <div class="form-group">
-                                                           <label>Email Address</label>
-                                                           <input type="email" class="form-control" name="email" autocomplete="off" required="">
-                                                       </div>
-                                                       <div class="form-group">
-                                                           <label>Password</label>
-                                                           <input type="password" class="form-control" name="password" required="">
-                                                       </div>
-                                                       <div class="form-group row">
-                                                           <div class="offset-md-2">
-                                                               <div class="form-check">
-                                                                   <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-    
-                                                                   <label class="form-check-label" for="remember">
-                                                                       {{ __('Remember Me') }}
-                                                                   </label>
-                                                               </div>
-                                                           </div>
-                                                       </div>
-                                                       <div class="form-group">
-                                                           <button type="submit" class="btn btn-sm btn-info">login</button>
-                                                       </div>
-                                                   </form>
-                                                   <div class="form-group">
-                                                     <a href="#" class="btn btn-danger btn-sm btn-block text-white">Login WIth Google</a>
+                                    <div class="top_bar_menu">
+                                        <ul class="standard_dropdown top_bar_dropdown">
+                                            <li>
+                                                <a href="#">Login<i class="fas fa-chevron-down"></i></a>
+                                                <ul style="width:300px; padding:10px;">
+                                                    <div>
+                                                        <strong>login your account</strong><br>
+                                                        <br>
+                                                        <form action="{{ route('login') }}" method="post">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label>Email Address</label>
+                                                                <input type="email" class="form-control" name="email"
+                                                                    autocomplete="off" required="">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Password</label>
+                                                                <input type="password" class="form-control" name="password"
+                                                                    required="">
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <div class="offset-md-2">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            name="remember" id="remember"
+                                                                            {{ old('remember') ? 'checked' : '' }}>
+
+                                                                        <label class="form-check-label" for="remember">
+                                                                            {{ __('Remember Me') }}
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-info">login</button>
+                                                            </div>
+                                                        </form>
+                                                        <div class="form-group">
+                                                            <a href="#"
+                                                                class="btn btn-danger btn-sm btn-block text-white">Login
+                                                                WIth Google</a>
+                                                        </div>
                                                     </div>
-                                               </div>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                        <a href="{{ route('register') }}">Register</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('register') }}">Register</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 @endguest
 
 
@@ -166,12 +174,12 @@
                         <!-- Logo -->
                         <div class="col-lg-2 col-sm-3 col-3 order-1">
                             <div class="logo_container">
-                                <div class="logo"><a href="{{url('/')}}">Equibment</a></div>
+                                <div class="logo"><a href="{{ url('/') }}">Medical Equibment</a></div>
                             </div>
                         </div>
 
                         <!-- Search -->
-                        <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                        <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right ">
                             <div class="header_search">
                                 <div class="header_search_content">
                                     <div class="header_search_form_container">
@@ -180,15 +188,15 @@
                                                 placeholder="Search for products...">
                                             <div class="custom_dropdown">
                                                 <div class="custom_dropdown_list">
-                                                    <span class="custom_dropdown_placeholder clc">All Categories</span>
-                                                    <i class="fas fa-chevron-down"></i>
+                                                    <span class="custom_dropdown_placeholder clc"> </span> {{-- All Categories--}}
+                                                    {{-- <i class="fas fa-chevron-down"></i> --}}
                                                     <ul class="custom_list clc">
-                                                        <li><a class="clc" href="#">All Categories</a></li>
+                                                        {{-- <li><a class="clc" href="#">All Categories</a></li>
                                                         <li><a class="clc" href="#">Computers</a></li>
                                                         <li><a class="clc" href="#">Laptops</a></li>
                                                         <li><a class="clc" href="#">Cameras</a></li>
                                                         <li><a class="clc" href="#">Hardware</a></li>
-                                                        <li><a class="clc" href="#">Smartphones</a></li>
+                                                        <li><a class="clc" href="#">Smartphones</a></li> --}}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -200,19 +208,22 @@
                                 </div>
                             </div>
                         </div>
-
+          
                         @php
-                            $wishlist = DB::table('wishlists')->where('user_id',Auth::id())->count()
+                            $wishlist = DB::table('wishlists')
+                                ->where('user_id', Auth::id())
+                                ->count();
                         @endphp
                         <!-- Wishlist -->
-                        <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                        <div class="col-lg-4   col-9 order-lg-3 order-2 text-lg-left text-right">
                             <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                                 <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                                     <div class="wishlist_icon"><img src="{{ asset('frontend') }}/images/heart.png"
                                             alt=""></div>
                                     <div class="wishlist_content">
-                                        <div class="wishlist_text"><a href="{{route('wishlist')}}">Wishlist</a></div>
-                                        <div class="wishlist_count">{{ $wishlist}}</div>
+                                        <div class="wishlist_text"><a href="{{ route('wishlist') }}">Wishlist</a>
+                                        </div>
+                                        <div class="wishlist_count">{{ $wishlist }}</div>
                                     </div>
                                 </div>
 
@@ -221,11 +232,12 @@
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                         <div class="cart_icon">
                                             <img src="{{ asset('frontend') }}/images/cart.png" alt="">
-                                            <div class="cart_count"><span>{{Cart::count();}}</span></div>
+                                            <div class="cart_count"><span>{{ Cart::count() }}</span></div>
                                         </div>
                                         <div class="cart_content">
-                                            <div class="cart_text"><a href="{{route('cart')}}">Cart</a></div>
-                                            <div class="cart_price">{{$setting->currency}} {{Cart::total();}}</div>
+                                            <div class="cart_text"><a href="{{ route('cart') }}">Cart</a></div>
+                                            <div class="cart_price">{{ $setting->currency }} {{ Cart::total() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -247,8 +259,12 @@
 
         <!-- Footer -->
         @php
-            $pages_one = DB::table('pages')->where('page_position',1)->get();
-            $pages_two= DB::table('pages')->where('page_position',2)->get();
+            $pages_one = DB::table('pages')
+                ->where('page_position', 1)
+                ->get();
+            $pages_two = DB::table('pages')
+                ->where('page_position', 2)
+                ->get();
         @endphp
 
         <footer class="footer">
@@ -258,21 +274,26 @@
                     <div class="col-lg-3 footer_col">
                         <div class="footer_column footer_contact">
                             <div class="logo_container">
-                                <div class="logo"><a href="#">OneTech</a></div>
+                                <div class="logo"><a href="{{url('/')}}">Medical Equibment</a></div>
                             </div>
                             <div class="footer_title">Got Question? Call Us 24/7</div>
                             <div class="footer_phone">+38 068 005 3570</div>
                             <div class="footer_contact_text">
-                                <p>17 Princess Road, London</p>
+                                <p>Sys Dev Ltd</p>
                                 <p>Grester London NW18JR, UK</p>
                             </div>
                             <div class="footer_social">
                                 <ul>
-                                    <li><a href="{{$setting->facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="{{$setting->twitter}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="{{$setting->youtube}}" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                                    <li><a href="{{$setting->linkedin}}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="{{$setting->youtube}}" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                    <li><a href="{{ $setting->facebook }}" target="_blank"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="{{ $setting->twitter }}" target="_blank"><i
+                                                class="fab fa-twitter"></i></a></li>
+                                    <li><a href="{{ $setting->youtube }}" target="_blank"><i
+                                                class="fab fa-youtube"></i></a></li>
+                                    <li><a href="{{ $setting->linkedin }}" target="_blank"><i
+                                                class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="{{ $setting->youtube }}" target="_blank"><i
+                                                class="fab fa-youtube"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -283,10 +304,11 @@
                             <div class="footer_title">Other pages</div>
                             <ul class="footer_list">
                                 @foreach ($pages_one as $row)
-                                <li><a href="{{route('view.page',$row->page_slug)}}">{{$row->page_name}}</a></li>
+                                    <li><a href="{{ route('view.page', $row->page_slug) }}">{{ $row->page_name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
-                            
+
                         </div>
                     </div>
 
@@ -294,7 +316,8 @@
                         <div class="footer_column">
                             <ul class="footer_list footer_list_2">
                                 @foreach ($pages_two as $row)
-                                <li><a href="{{route('view.page',$row->page_slug)}}">{{$row->page_name}}</a></li>
+                                    <li><a href="{{ route('view.page', $row->page_slug) }}">{{ $row->page_name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -304,13 +327,13 @@
                         <div class="footer_column">
                             <div class="footer_title">Customer Care</div>
                             <ul class="footer_list">
-                                <li><a href="{{route('home')}}">My Account</a></li>
-                                <li><a href="{{route('order.tracking')}}">Order Tracking</a></li>
+                                <li><a href="{{ route('home') }}">My Account</a></li>
+                                <li><a href="{{ route('order.tracking') }}">Order Tracking</a></li>
                                 <li><a href="#">Wish List</a></li>
                                 <li><a href="#">Our Blog</a></li>
                                 <li><a href="#">Contact Us</a></li>
                                 <li><a href="#">Become a Vendor</a></li>
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -372,8 +395,8 @@
     <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
     <script type="text/javascript" src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 
-     {{-- Toster part --}}
-     <script>
+    {{-- Toster part --}}
+    <script>
         @if (Session::has('messege'))
             var type = "{{ Session::get('alert-type', 'info') }}"
 

@@ -67,7 +67,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::post('/store', 'ProductController@store')->name('product.store');
         Route::delete('/delete/{id}', 'ProductController@destroy')->name('product.delete');
         Route::get('/edit/{id}', 'ProductController@edit')->name('product.edit');
-        // Route::post('/update', 'BrandController@update')->name('brand.update');
+        Route::post('/update', 'ProductController@update')->name('product.update');
 
         Route::get('/not-featured/{id}', 'ProductController@notfeatured');
         Route::get('/active-featured/{id}', 'ProductController@activefeatured');
@@ -156,6 +156,13 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'is_a
         Route::delete('/delete/{id}', 'PickupController@destroy')->name('pickup.point.delete');
         Route::get('/edit/{id}', 'PickupController@edit');
         Route::post('/update', 'PickupController@update')->name('pickup.point.update');
+    });
+
+      //__report routes__//
+      Route::group(['prefix'=>'report'], function(){
+        Route::get('/order','OrderController@Reportindex')->name('report.order.index');
+        Route::get('/order/print','OrderController@ReportOrderPrint')->name('report.order.print');
+        
     });
 
 

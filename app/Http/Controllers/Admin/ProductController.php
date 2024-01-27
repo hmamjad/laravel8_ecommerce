@@ -214,9 +214,104 @@ class ProductController extends Controller
         $brand = Brand::all();
         $pickup_point = DB::table('pickup_point')->get();
         $warehouse = DB::table('warehouses')->get();
+        $childcategory = DB::table('childcategories')->where('category_id', $product->category_id)->get(); // subcategory dore kaj korle valo hoto
 
-        return view('admin.product.edit', compact('product', 'category', 'subcategory', 'brand', 'pickup_point', 'warehouse'));
+        return view('admin.product.edit', compact('product', 'category', 'subcategory', 'brand', 'pickup_point', 'warehouse', 'childcategory'));
     }
+
+
+    //__update product__//
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'code' => 'required|max:55',
+            'subcategory_id' => 'required',
+            'brand_id' => 'required',
+            'unit' => 'required',
+            'selling_price' => 'required',
+            'color' => 'required',
+            'description' => 'required',
+        ]);
+
+        //subcategory call for category id
+        $subcategory = DB::table('subcategories')->where('id', $request->subcategory_id)->first();
+        $slug = Str::slug($request->name, '-');
+
+
+        $data = array();
+        $data['name'] = $request->name;
+        $data['slug'] = Str::slug($request->name, '-');
+        $data['code'] = $request->code;
+        $data['category_id'] = $subcategory->category_id;
+        $data['subcategory_id'] = $request->subcategory_id;
+        $data['childcategory_id'] = $request->childcategory_id;
+        $data['brand_id'] = $request->brand_id;
+        $data['pickup_point_id'] = $request->pickup_point_id;
+        $data['unit'] = $request->unit;
+        $data['tags'] = $request->tags;
+        $data['purchase_price'] = $request->purchase_price;
+        $data['selling_price'] = $request->selling_price;
+        $data['discount_price'] = $request->discount_price;
+        $data['warehouse'] = $request->warehouse;
+        $data['stock_quantity'] = $request->stock_quantity;
+        $data['color'] = $request->color;
+        $data['size'] = $request->size;
+        $data['description'] = $request->description;
+        $data['video'] = $request->video;
+        $data['featured'] = $request->featured;
+        $data['today_deal'] = $request->today_deal;
+        $data['product_slider'] = $request->product_slider;
+        $data['status'] = $request->status;
+        $data['trendy'] = $request->trendy;
+
+      
+
+        //__old thumbnail ase kina__ jodi thake new thumbnail insert korte hobe
+        $thumbnail = $request->file('thumbnail');
+        if ($thumbnail) {
+            // // delete old thumbnail
+            // $old_thumbnail ='files/product/'.$request->old_thumbnail;
+            // if(File::exists($old_thumbnail)){
+            //     File::delete($old_thumbnail);
+            // }
+
+            // insert new thumbnail
+            $thumbnail = $request->thumbnail;
+            $photoname = $slug . '.' . $thumbnail->getClientOriginalExtension();
+            Image::make($thumbnail)->resize(600, 600)->save('files/product/' . $photoname);
+            $data['thumbnail'] = $photoname;   // files/product/plus-point.jpg   
+        }
+
+        //__multiple image update__//
+
+        $old_images = $request->has('old_images');
+        if ($old_images) {
+            $images = $request->old_images;
+            $data['images'] = json_encode($images);
+        } else {
+            $images = array();
+            $data['images'] = json_encode($images);
+        }
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $key => $image) {
+                $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+                Image::make($image)->resize(600, 600)->save('files/product/' . $imageName);
+                array_push($images, $imageName);
+            }
+            $data['images'] = json_encode($images);
+        }
+
+
+
+        DB::table('products')->where('id', $request->id)->update($data);
+        $notification = array('messege' => 'Product Updated!', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
+
+
+
 
 
     // Active to Deactive featured
@@ -262,6 +357,13 @@ class ProductController extends Controller
     // Product Delete
     public function destroy($id)
     {
+        $product = DB::table('products')->where('id', $id)->first();
+
+        if(File::exists('files/product/'.$product->thumbnail)){
+            File::delete('files/product/'.$product->thumbnail);
+        }
+
+
         DB::table('products')->where('id', $id)->delete();
         return response()->json("successfully Deleted!");
     }

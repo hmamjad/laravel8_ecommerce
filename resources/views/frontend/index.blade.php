@@ -442,7 +442,7 @@
     @endforeach
 
 
-    <div class="adverts">
+    {{-- <div class="adverts">
         <div class="container">
             <div class="row">
 
@@ -497,7 +497,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Trends -->
 
@@ -748,7 +748,7 @@
 
     <!-- Characteristics -->
 
-    <div class="characteristics">
+    {{-- <div class="characteristics">
         <div class="container">
             <div class="row">
 
@@ -801,7 +801,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Newsletter -->
 

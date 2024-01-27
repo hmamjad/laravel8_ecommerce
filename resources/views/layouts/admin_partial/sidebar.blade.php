@@ -1,12 +1,13 @@
 @php
-   $setting = DB::table('settings')->first();
+    $setting = DB::table('settings')->first();
 @endphp
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
         {{-- <img src="{{ url($setting->favicon) }}" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
-        <img src="{{ asset('public/backend') }}/dist/img/AdminLTELogo.png" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{{ asset('public/backend') }}/dist/img/AdminLTELogo.png" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
         <span class="brand-text font-weight-light">Medical Equibment</span>
     </a>
 
@@ -84,8 +85,8 @@
                     </ul>
                 </li>
 
-                 {{-- Product --}}
-                 <li class="nav-item">
+                {{-- Product --}}
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
@@ -107,7 +108,7 @@
                                 <p>Manage Product</p>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </li>
 
@@ -162,8 +163,8 @@
                         </li> --}}
                     </ul>
                 </li>
-                 {{-- Pickup point --}}
-                 <li class="nav-item">
+                {{-- Pickup point --}}
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
@@ -179,9 +180,55 @@
                                 <p>Pickup Point</p>
                             </a>
                         </li>
-                       
+
                     </ul>
                 </li>
+
+                {{-- Report --}}
+
+                {{-- @if (Auth::user()->report == 1) --}}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Reports
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('report.order.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Order report</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Customer report</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Stock report </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Product report </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ticket report </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {{-- @endif --}}
 
                 {{-- Setting --}}
                 <li class="nav-item">
