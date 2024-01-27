@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
-use DB;
-use App\Mail\RecievedMail;
+use Illuminate\Support\Facades\DB;
+use App\Mail\RecieveMail;
 use Mail;
 class OrderController extends Controller
 {
@@ -74,8 +74,8 @@ class OrderController extends Controller
                         $actionbtn='
                         <a href="#" data-id="'.$row->id.'" class="btn btn-primary btn-sm view" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"></i></a>
                         <a href="#" data-id="'.$row->id.'" class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></a> 
-                        <a href="#" class="btn btn-danger btn-sm" id="delete"><i class="fas fa-trash"></i>  
-                        </a>'; //'.route('order.delete',[$row->id]).'
+                        <a href="'.route('order.delete',[$row->id]).'" class="btn btn-danger btn-sm" id="delete"><i class="fas fa-trash"></i>  
+                        </a>'; 
                        return $actionbtn;   
                     })
                     ->rawColumns(['action','status'])
@@ -86,48 +86,48 @@ class OrderController extends Controller
     }
 
 
-    // //__order edit
-    // public function Editorder($id)
-    // {
-    //     $order=DB::table('orders')->where('id',$id)->first();
-    //     return view('admin.order.edit',compact('order'));
-    // }
+    //__order edit
+    public function Editorder($id)
+    {
+        $order=DB::table('orders')->where('id',$id)->first();
+        return view('admin.order.edit',compact('order'));
+    }
 
-    // //__update status
-    // public function updateStatus(Request $request)
-    // {
-    //     $data=array();
-    //     $data['c_name']=$request->c_name;
-    //     $data['c_email']=$request->c_email;
-    //     $data['c_address']=$request->c_address;
-    //     $data['c_address']=$request->c_address;
-    //     $data['status']=$request->status;
+    //__update status
+    public function updateStatus(Request $request)
+    {
+        $data=array();
+        $data['c_name']=$request->c_name;
+        $data['c_email']=$request->c_email;
+        $data['c_address']=$request->c_address;
+        $data['c_address']=$request->c_address;
+        $data['status']=$request->status;
 
-    //     if($request->status=='1'){
-    //         Mail::to($request->c_email)->send(new RecievedMail($data));
-    //     }
+        // if($request->status=='1'){
+        //     Mail::to($request->c_email)->send(new RecieveMail($data));
+        // }
         
-    //     DB::table('orders')->where('id',$request->id)->update($data);
-    //     return response()->json('successfully cjanged status!');
-    // }
+        DB::table('orders')->where('id',$request->id)->update($data);
+        return response()->json('successfully changed status!');
+    }
 
 
-    // //__view Order
-    // public function ViewOrder($id)
-    // {
-    //     $order=DB::table('orders')->where('id',$id)->first();
-    //     $order_details=DB::table('order_details')->where('order_id',$id)->get();
-    //     return view('admin.order.order_details',compact('order','order_details'));
-    // }
+    //__view Order
+    public function ViewOrder($id)
+    {
+        $order=DB::table('orders')->where('id',$id)->first();
+        $order_details=DB::table('order_details')->where('order_id',$id)->get();
+        return view('admin.order.order_details',compact('order','order_details'));
+    }
 
-    // //__delete
-    // public function delete($id)
-    // {
-    //    $order=DB::table('orders')->where('id',$id)->delete();
-    //    $order_details=DB::table('order_details')->where('order_id',$id)->delete();
-    //    $notification=array('messege' => 'Order deleted!', 'alert-type' => 'success');
-    //    return redirect()->back()->with($notification);
-    // }
+    //__delete
+    public function delete($id)
+    {
+       $order=DB::table('orders')->where('id',$id)->delete();
+       $order_details=DB::table('order_details')->where('order_id',$id)->delete();
+       $notification=array('messege' => 'Order deleted!', 'alert-type' => 'success');
+       return redirect()->back()->with($notification);
+    }
 
     // //__report index__//
     // public function Reportindex(Request $request)
